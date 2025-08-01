@@ -22,7 +22,7 @@ Esta extensão é para o acesso a serviços Proton, somente um popup com os link
 ====
 Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.  
 
-Por que? Porque não? Mas não era só salvar nos favoritos? Sim.
+Por quê? Por que não? Mas não era só salvar nos favoritos? Sim.
 ====
 
 
@@ -44,11 +44,6 @@ Por que? Porque não? Mas não era só salvar nos favoritos? Sim.
 . Clique em "Carregar sem compactação" e selecione a pasta do projeto.
 
 == Estrutura do Projeto
-
-- `popup/` – Interface do launcher (HTML, CSS, JS)
-- `config/` – Arquivos de configuração padrão (`apps.json`, `settings.json`)
-- `storage/` – Gerenciamento de armazenamento do usuário
-- `background/` – Service worker para eventos e integrações
 
 ----
 project/
