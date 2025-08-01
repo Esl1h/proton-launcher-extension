@@ -49,7 +49,33 @@ Por que? Porque não? Mas não era só salvar nos favoritos? Sim.
 - `config/` – Arquivos de configuração padrão (`apps.json`, `settings.json`)
 - `storage/` – Gerenciamento de armazenamento do usuário
 - `background/` – Service worker para eventos e integrações
-- `assets/` – Ícones e logo
+
+----
+project/
+├── manifest.json            # arquivo de manifesto da extensão
+├── background               # service worker para eventos e integrações
+│   └── background.js
+├── config                   # arquivos de configuração
+│   ├── apps.json
+│   └── settings.json
+├── storage                  # gerenciamento de armazenamento
+|    └── storage.js
+├── popup                    # interface do launcher 
+│   ├── popup.css
+│   ├── popup.html
+│   └── popup.js
+├── assets                   # icones e logos
+│   ├── icons
+│   │   ├── icon128.png
+│   │   ├── icon16.png
+│   │   └── icon48.png
+│   └── proton-logo.svg
+├── README.adoc              # Este readme ;-)
+└── docs                     # documentação adicional
+    └── screenshot.png       # captura de tela do launcher
+
+----
+
 
 == Configuração
 
