@@ -1,12 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Proton Launcher",
+  "short_name": "ProtonLauncher",
   "version": "1.0.0",
-  "description": "Lançador rápido para webapps do Proton com grid 3x3 e status",
+  "description": "Lançador rápido para webapps do Proton",
+  "author": "Esli Silva",
+  "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",
   "permissions": [
     "storage",
     "tabs",
-    "activeTab",
     "alarms"
   ],
   "action": {
@@ -29,18 +31,15 @@
       "description": "Abrir WebApp Launcher"
     }
   },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "config/*.json",
-        "assets/**/*"
-      ],
-      "matches": ["<all_urls>"]
-    }
-  ],
   "icons": {
     "16": "assets/icons/icon16.png",
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
+  },
+  //"options_page": "popup/options.html", // configs on extension settings
+  //"default_locale": "pt_BR", // future use for translations
+  "minimum_chrome_version": "100",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }
