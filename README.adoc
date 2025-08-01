@@ -4,11 +4,19 @@ Uma extensão para Chrome/Brave/Chromium que permite lançar rapidamente WebApps
 
 image::docs/screenshot.png[Screenshot do Proton Launcher Extension, width=400]
 
+[IMPORTANT]
+====
+Não afiliado ao Proton AG.
+Esta extensão é um projeto independente, sem vínculos com a Proton AG ou seus produtos oficiais.
+Esta extensão é para o acesso a serviços Proton, somente um popup com os links para os serviços Proton.
+Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.
+====
+
 
 == Funcionalidades
 
-- Grid 3x3 personalizável para acesso rápido aos principais serviços Proton (Mail, Calendar, Drive, Pass, Wallet, VPN, SimpleLogin, Notes, AI, etc)
-- Ícones, categorias e descrições para cada app
+- Grid 3x3 personalizável - URLs no json
+- Possibilidade de adicionar ícones, categorias e descrições para cada link
 - Status de conexão (online/offline) e quantidade de apps configurados
 - Temas visuais customizáveis
 - Links rápidos para status dos serviços e download de apps oficiais
@@ -38,8 +46,4 @@ Edite os arquivos em `config/` para personalizar os apps e preferências padrão
 
 - `Ctrl+Shift+L` – Abre o launcher rapidamente
 
-== Créditos
 
-Não afiliado ao Proton AG.
-
-==
