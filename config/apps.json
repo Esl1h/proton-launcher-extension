@@ -1,0 +1,67 @@
+{
+  "apps": [
+    {
+      "title": "Mail",
+      "url": "https://mail.proton.me",
+      "icon": "https://mail.proton.me/assets/favicon.ico",
+      "position": 0,
+      "description": "Email criptografado e privado"
+    },
+    {
+      "title": "Calendar",
+      "url": "https://calendar.proton.me",
+      "icon": "https://calendar.proton.me/assets/favicon.ico",
+      "position": 1,
+      "description": "Calendário privado e criptografado"
+    },
+    {
+      "title": "Pass",
+      "url": "https://pass.proton.me",
+      "icon": "https://pass.proton.me/assets/favicon.ico",
+      "position": 2,
+      "description": "Gerenciador de senhas seguro"
+    },
+    {
+      "title": "Wallet",
+      "url": "https://wallet.proton.me",
+      "icon": "https://wallet.proton.me/assets/favicon.ico",
+      "position": 3,
+      "description": "Carteira Bitcoin auto-custodial"
+    },
+    {
+      "title": "Drive",
+      "url": "https://drive.proton.me",
+      "icon": "https://drive.proton.me/assets/favicon.ico",
+      "position": 4,
+      "description": "Armazenamento em nuvem criptografado"
+    },    
+    {
+      "title": "VPN",
+      "url": "https://account.protonvpn.com/dashboardV2#VpnDownloadAndInfoSection",
+      "icon": "https://protonvpn.com/favicons/favicon-32x32.png",
+      "position": 5,
+      "description": "VPN"
+    },
+    {
+      "title": "SimpleLogin",
+      "url": "https://app.simplelogin.io",
+      "icon": "https://app.simplelogin.io/favicon.ico",
+      "position": 6,
+      "description": "Aliases de email para proteção"
+    },
+    {
+      "title": "Notes",
+      "url": "https://app.standardnotes.com",
+      "icon": "https://app.standardnotes.com/favicon/favicon-32x32.png",
+      "position": 7,
+      "description": "Notas criptografadas e privadas"
+    },
+    {
+      "title": "AI",
+      "url": "https://lumo.proton.me/",
+      "icon": "https://lumo.proton.me/assets/favicon.ico",
+      "position": 8,
+      "description": "Assistente de IA para produtividade"
+    }
+  ]
+}

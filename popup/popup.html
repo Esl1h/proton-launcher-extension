@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebApp Launcher</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Logo do Proton -->
+      <div class="header-logo">
+        <img src="../assets/proton-logo.svg" alt="Proton" class="proton-logo" />
+      </div>
+      
+      <div class="grid-container">
+        <div class="app-grid" id="appGrid">
+          <!-- Grid será gerado dinamicamente -->
+        </div>
+      </div>
+      
+      <div class="status-section">
+        <div class="status-line" id="statusLine1">
+          Carregando configurações...
+        </div>
+        <div class="status-line" id="statusLine2">
+          Pronto para uso
+        </div>
+      </div>
+      
+      <!-- APENAS ESTA SEÇÃO É NOVA -->
+      <div class="status-section">
+        <div class="status-line">
+          <a href="#" id="statusLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">📊 Services Status</a>
+        </div>
+        <div class="status-line">
+          <a href="#" id="appsLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">🚀 Download officials Apps and extensions</a>
+        </div>
+      </div>
+      
+      <div class="settings-button">
+        <button id="settingsBtn" title="Configurações">⚙️</button>
+        <button id="reloadBtn" title="Recarregar Configs">🔄</button>
+      </div>
+    </div>
+    
+    <script src="popup.js"></script>
+  </body>
+</html>
