@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build e cache
+dist/
+build/
+.cache/
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configurações do editor
+.vscode/
+.idea/
+.zed/
+
+# Arquivos temporários
+*.tmp
+*.swp
+*.swo
+
+# Extensões de backup
+*~
+*.bak
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*
