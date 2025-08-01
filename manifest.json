@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "WebApp Launcher",
+  "name": "Proton Launcher",
   "version": "1.0.0",
-  "description": "Lançador rápido para webapps com grid 3x3 e status",
+  "description": "Lançador rápido para webapps do Proton com grid 3x3 e status",
   "permissions": [
     "storage",
     "tabs",
@@ -11,7 +11,7 @@
   ],
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "WebApp Launcher",
+    "default_title": "Proton Launcher",
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "48": "assets/icons/icon48.png",
