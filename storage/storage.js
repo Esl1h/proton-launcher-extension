@@ -1,6 +1,4 @@
-// Gerenciador de armazenamento
 const StorageManager = {
-  // Salva configurações
   async saveApps(apps) {
     try {
       await chrome.storage.sync.set({ webapps: apps });
@@ -11,7 +9,6 @@ const StorageManager = {
     }
   },
 
-  // Carrega configurações
   async loadApps() {
     try {
       const result = await chrome.storage.sync.get(['webapps']);
@@ -22,7 +19,6 @@ const StorageManager = {
     }
   },
 
-  // Salva configurações gerais
   async saveSettings(settings) {
     try {
       await chrome.storage.sync.set({ settings });
@@ -33,7 +29,6 @@ const StorageManager = {
     }
   },
 
-  // Carrega configurações gerais
   async loadSettings() {
     try {
       const result = await chrome.storage.sync.get(['settings']);
@@ -49,5 +44,4 @@ const StorageManager = {
   }
 };
 
-// Disponibiliza globalmente
 window.StorageManager = StorageManager;
