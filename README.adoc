@@ -11,16 +11,16 @@ Uma extensão para Chrome/Brave/Chromium que permite lançar rapidamente WebApps
 
 [IMPORTANT]
 ====
-Não afiliado ao Proton AG. 
- 
-Esta extensão é um projeto independente, sem vínculos com a Proton AG ou seus produtos oficiais.  
+Não afiliado ao Proton AG.
 
-Esta extensão é para o acesso a serviços Proton, somente um popup com os links para os serviços Proton.  
+Esta extensão é um projeto independente, sem vínculos com a Proton AG ou seus produtos oficiais.
+
+Esta extensão é para o acesso a serviços Proton, somente um popup com os links para os serviços Proton.
 ====
 
 [NOTE]
 ====
-Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.  
+Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.
 
 Por quê? Por que não? Mas não era só salvar nos favoritos? Sim.
 ====
@@ -59,7 +59,7 @@ project/
 │   └── settings.json
 ├── storage                  # gerenciamento de armazenamento
 |    └── storage.js
-├── popup                    # interface do launcher 
+├── popup                    # interface do launcher
 │   ├── popup.css
 │   ├── popup.html
 │   └── popup.js
@@ -71,7 +71,7 @@ project/
 │   └── proton-logo.svg
 ├── README.adoc              # Este readme ;-)
 └── docs                     # documentação adicional
-    └── screenshot.png       # captura de tela do launcher
+
 
 ----
 
