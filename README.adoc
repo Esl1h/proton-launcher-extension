@@ -11,9 +11,13 @@ Não afiliado ao Proton AG.
 Esta extensão é um projeto independente, sem vínculos com a Proton AG ou seus produtos oficiais.  
 
 Esta extensão é para o acesso a serviços Proton, somente um popup com os links para os serviços Proton.  
+====
 
+[NOTE]
+====
 Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.  
 
+Por que? Porque não? Mas não era só salvar nos favoritos? Sim.
 ====
 
 
