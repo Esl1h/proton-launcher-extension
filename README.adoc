@@ -5,6 +5,12 @@ Uma extensão para Chrome/Brave/Chromium que permite lançar rapidamente WebApps
 [.text-center]
 image::docs/screenshot.png[Screenshot do Proton Launcher Extension, width=400, align="center"]
 
+++++
+<div align="center">
+  <img src="docs/screenshot.png" alt="Screenshot do Proton Launcher Extension" width="400"/>
+</div>
+++++
+
 [IMPORTANT]
 ====
 Não afiliado ao Proton AG. 
