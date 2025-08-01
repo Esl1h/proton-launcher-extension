@@ -2,7 +2,7 @@
 
 Uma extensão para Chrome/Brave/Chromium que permite lançar rapidamente WebApps Proton a partir de um grid personalizável, com status de conexão e atalhos.
 
-image::docs/screenshot.png[Screenshot do Proton Launcher Extension, width=600]
+image::docs/screenshot.png[Screenshot do Proton Launcher Extension, width=400]
 
 
 == Funcionalidades
