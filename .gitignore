@@ -31,3 +31,11 @@ Thumbs.db
 .env
 .env.local
 .env.*
+
+# Certs
+.crt
+.csr
+.pfx
+.p12
+.key
+.pem
