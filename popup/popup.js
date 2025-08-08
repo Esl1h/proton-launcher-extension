@@ -69,56 +69,12 @@ class WebAppLauncher {
   }
 
   loadDefaultConfigurations() {
-    this.apps = [
-      {
-        title: 'url',
-        url: 'https://url.com',
-        icon: 'https://url.com/ui.ico',
-        position: 0,
-        category: 'productivity'
-      },
-      {
-        title: 'url2',
-        url: 'https://url2.com',
-        icon: 'https://url2.com/favicon_v2014_2.ico',
-        position: 1,
-        category: 'storage'
-      }
-    ];
-    this.categories = {
-      productivity: {
-        name: 'Produtividade',
-        color: '#667eea',
-        icon: '📊'
-      },
-      storage: {
-        name: 'Armazenamento',
-        color: '#48bb78',
-        icon: '💾'
-      }
-    };
-    this.settings = {
-      ui: {
-        theme: 'gradient',
-        grid_size: 3,
-        show_categories: true
-      },
-      behavior: {
-        open_as_webapp: true,
-        close_popup_on_launch: true
-      },
-      status: {
-        show_status: true,
-        update_interval: 30000
-      },
-      themes: {
-        gradient: {
-          primary: '#667eea',
-          secondary: '#764ba2',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-        }
-      }
-    };
+    const appsConfig = this.getDefaultConfig('apps.json');
+    const settingsConfig = this.getDefaultConfig('settings.json');
+    
+    this.apps = appsConfig?.apps || [];
+    this.categories = appsConfig?.categories || {};
+    this.settings = settingsConfig || {};
   }
 
   getDefaultConfig(configFile) {
@@ -126,16 +82,16 @@ class WebAppLauncher {
       return {
         apps: [
           {
-            title: 'title',
-            url: 'https://url.com',
-            icon: 'https://url.com/ui.ico',
+            title: 'ProtonMail',
+            url: 'https://mail.proton.me',
+            icon: 'https://mail.proton.me/assets/favicon.ico',
             position: 0,
             category: 'productivity'
           },
           {
-            title: 'title2',
-            url: 'https://url2.com',
-            icon: 'https://url2.com/images/favicon_v2014_2.ico',
+            title: 'ProtonDrive',
+            url: 'https://drive.proton.me',
+            icon: 'https://drive.proton.me/assets/favicon.ico',
             position: 1,
             category: 'storage'
           }
@@ -183,7 +139,7 @@ class WebAppLauncher {
 
   async loadUserConfig() {
     try {
-      const result = await chrome.storage.sync.get(['userApps', 'lastUpdated']);
+      const result = await chrome.storage.sync.get(['userApps']);
       return result.userApps || null;
     } catch (error) {
       return null;

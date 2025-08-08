@@ -36,8 +36,6 @@
     "48": "assets/icons/icon48.png",
     "128": "assets/icons/icon128.png"
   },
-  //"options_page": "popup/options.html", // configs on extension settings
-  //"default_locale": "pt_BR", // future use for translations
   "minimum_chrome_version": "100",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
