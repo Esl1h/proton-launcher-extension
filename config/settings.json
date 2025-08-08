@@ -2,21 +2,15 @@
   "ui": {
     "theme": "gradient",
     "grid_size": 3,
-    "show_categories": true,
-    "show_descriptions": false,
-    "animation_duration": 200
+    "show_categories": true
   },
   "behavior": {
     "open_as_webapp": true,
-    "close_popup_on_launch": true,
-    "remember_last_used": true,
-    "auto_detect_favicons": true
+    "close_popup_on_launch": true
   },
   "status": {
     "show_status": true,
-    "update_interval": 30000,
-    "show_connection_status": true,
-    "show_app_count": true
+    "update_interval": 30000
   },
   "themes": {
     "gradient": {
