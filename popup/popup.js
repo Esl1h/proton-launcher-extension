@@ -2,12 +2,9 @@ class WebAppLauncher {
   constructor() {
     this.apps = [];
     this.settings = {};
-    this.categories = {};
     this.configCache = new Map();
     this.init();
   }
-
-
 
   async init() {
     const startTime = performance.now();
@@ -25,9 +22,6 @@ class WebAppLauncher {
     } catch (error) {
       this.updateStatusLine(1, 'Erro ao carregar', 'error');
       this.updateStatusLine(2, '', 'error');
-      this.loadDefaultConfigurations();
-      this.renderGrid();
-      this.setupEventListeners();
     }
   }
 
@@ -35,150 +29,27 @@ class WebAppLauncher {
     if (this.configCache.has(configFile)) {
       return this.configCache.get(configFile);
     }
-    try {
-      const url = chrome.runtime.getURL(`config/${configFile}`);
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error();
-      }
-      const config = await response.json();
-      this.configCache.set(configFile, config);
-      return config;
-    } catch (error) {
-      const defaultConfig = this.getDefaultConfig(configFile);
-      return defaultConfig;
-    }
+    
+    const url = chrome.runtime.getURL(`config/${configFile}`);
+    const response = await fetch(url);
+    const config = await response.json();
+    this.configCache.set(configFile, config);
+    return config;
   }
 
   async loadConfigurations() {
-    try {
-      const [appsConfig, settingsConfig] = await Promise.all([
-        this.loadConfig('apps.json'),
-        this.loadConfig('settings.json')
-      ]);
-      this.apps = appsConfig?.apps || [];
-      this.categories = appsConfig?.categories || {};
-      this.settings = settingsConfig || {};
-      const userApps = await this.loadUserConfig();
-      if (userApps && userApps.length > 0) {
-        this.mergeUserApps(userApps);
-      }
-    } catch (error) {
-      throw error;
+    const [appsConfig, settingsConfig] = await Promise.all([
+      this.loadConfig('apps.json'),
+      this.loadConfig('settings.json')
+    ]);
+    
+    this.apps = appsConfig.apps || [];
+    this.settings = settingsConfig || {};
+    
+    const userApps = await this.loadUserConfig();
+    if (userApps && userApps.length > 0) {
+      this.mergeUserApps(userApps);
     }
-  }
-
-  loadDefaultConfigurations() {
-    this.apps = [
-      {
-        title: 'url',
-        url: 'https://url.com',
-        icon: 'https://url.com/ui.ico',
-        position: 0,
-        category: 'productivity'
-      },
-      {
-        title: 'url2',
-        url: 'https://url2.com',
-        icon: 'https://url2.com/favicon_v2014_2.ico',
-        position: 1,
-        category: 'storage'
-      }
-    ];
-    this.categories = {
-      productivity: {
-        name: 'Produtividade',
-        color: '#667eea',
-        icon: '📊'
-      },
-      storage: {
-        name: 'Armazenamento',
-        color: '#48bb78',
-        icon: '💾'
-      }
-    };
-    this.settings = {
-      ui: {
-        theme: 'gradient',
-        grid_size: 3,
-        show_categories: true
-      },
-      behavior: {
-        open_as_webapp: true,
-        close_popup_on_launch: true
-      },
-      status: {
-        show_status: true,
-        update_interval: 30000
-      },
-      themes: {
-        gradient: {
-          primary: '#667eea',
-          secondary: '#764ba2',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-        }
-      }
-    };
-  }
-
-  getDefaultConfig(configFile) {
-    if (configFile === 'apps.json') {
-      return {
-        apps: [
-          {
-            title: 'title',
-            url: 'https://url.com',
-            icon: 'https://url.com/ui.ico',
-            position: 0,
-            category: 'productivity'
-          },
-          {
-            title: 'title2',
-            url: 'https://url2.com',
-            icon: 'https://url2.com/images/favicon_v2014_2.ico',
-            position: 1,
-            category: 'storage'
-          }
-        ],
-        categories: {
-          productivity: {
-            name: 'Produtividade',
-            color: '#667eea',
-            icon: '📊'
-          },
-          storage: {
-            name: 'Armazenamento',
-            color: '#48bb78',
-            icon: '💾'
-          }
-        }
-      };
-    }
-    if (configFile === 'settings.json') {
-      return {
-        ui: {
-          theme: 'gradient',
-          grid_size: 3,
-          show_categories: true
-        },
-        behavior: {
-          open_as_webapp: true,
-          close_popup_on_launch: true
-        },
-        status: {
-          show_status: true,
-          update_interval: 30000
-        },
-        themes: {
-          gradient: {
-            primary: '#667eea',
-            secondary: '#764ba2',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-          }
-        }
-      };
-    }
-    return {};
   }
 
   async loadUserConfig() {
@@ -206,9 +77,11 @@ class WebAppLauncher {
   renderGrid() {
     const grid = document.getElementById('appGrid');
     if (!grid) return;
+    
     grid.innerHTML = '';
     const gridSize = this.settings.ui?.grid_size || 3;
     const totalSlots = gridSize * gridSize;
+    
     for (let i = 0; i < totalSlots; i++) {
       const app = this.apps.find(app => app.position === i);
       const item = this.createAppItem(app, i);
@@ -220,23 +93,23 @@ class WebAppLauncher {
     const item = document.createElement('div');
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
+    
     if (app) {
-      const category = this.categories[app.category];
-      const categoryColor = category?.color || '#667eea';
       item.innerHTML = `
         <img class="app-icon" src="${app.icon}" alt="${app.title}" 
              onerror="this.src='${this.getDefaultIcon()}'">
         <div class="app-title">${app.title}</div>
-        ${this.settings.ui?.show_categories && category ? 
-          `<div class="app-category" style="color: ${categoryColor}">
-            ${category.icon || ''} ${category.name}
-           </div>` : ''}
+        ${app.description ? `` : ''}
       `;
+      // To show description in each icon (line above)
+      //  ${app.description ? `<div class="app-description">${app.description}</div>` : ''}
+      //
       item.addEventListener('click', () => this.openApp(app));
     } else {
       item.innerHTML = '<div class="app-title">+</div>';
       item.addEventListener('click', () => this.openSettings(position));
     }
+    
     return item;
   }
 
@@ -260,6 +133,7 @@ class WebAppLauncher {
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
+    
     if (settingsBtn) {
       settingsBtn.addEventListener('click', () => this.openSettings());
     }
