@@ -8,8 +8,7 @@
   "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",
   "permissions": [
     "storage",
-    "tabs",
-    "alarms"
+    "tabs"
   ],
   "action": {
     "default_popup": "popup/popup.html",

@@ -57,8 +57,6 @@ project/
 ├── config                   # arquivos de configuração
 │   ├── apps.json
 │   └── settings.json
-├── storage                  # gerenciamento de armazenamento
-|    └── storage.js
 ├── popup                    # interface do launcher
 │   ├── popup.css
 │   ├── popup.html
