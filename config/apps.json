@@ -5,64 +5,90 @@
       "url": "https://mail.proton.me",
       "icon": "https://mail.proton.me/assets/favicon.ico",
       "position": 0,
-      "description": "Email criptografado e privado"
+      "category": "communication"
     },
     {
       "title": "Calendar",
       "url": "https://calendar.proton.me",
       "icon": "https://calendar.proton.me/assets/favicon.ico",
       "position": 1,
-      "description": "Calendário privado e criptografado"
-
+      "category": "productivity"
     },
     {
       "title": "Pass",
       "url": "https://pass.proton.me",
       "icon": "https://pass.proton.me/assets/favicon.ico",
       "position": 2,
-      "description": "Gerenciador de senhas seguro"
+      "category": "security"
     },
     {
       "title": "Wallet",
       "url": "https://wallet.proton.me",
       "icon": "https://wallet.proton.me/assets/favicon.ico",
       "position": 3,
-      "description": "Carteira Bitcoin auto-custodial"
+      "category": "finance"
     },
     {
       "title": "Drive",
       "url": "https://drive.proton.me",
       "icon": "https://drive.proton.me/assets/favicon.ico",
       "position": 4,
-      "description": "Armazenamento em nuvem criptografado"
+      "category": "storage"
     },    
     {
       "title": "VPN",
       "url": "https://account.protonvpn.com/dashboardV2#VpnDownloadAndInfoSection",
       "icon": "https://protonvpn.com/favicons/favicon-32x32.png",
       "position": 5,
-      "description": "VPN"
+      "category": "security"
     },
     {
       "title": "SimpleLogin",
       "url": "https://app.simplelogin.io",
       "icon": "https://app.simplelogin.io/favicon.ico",
       "position": 6,
-      "description": "Aliases de email para proteção"
+      "category": "security"
     },
     {
       "title": "Notes",
       "url": "https://app.standardnotes.com",
       "icon": "https://app.standardnotes.com/favicon/favicon-32x32.png",
       "position": 7,
-      "description": "Notas criptografadas e privadas"
+      "category": "productivity"
     },
     {
       "title": "AI",
       "url": "https://lumo.proton.me/",
       "icon": "https://lumo.proton.me/assets/favicon.ico",
       "position": 8,
-      "description": "Assistente de IA para produtividade"
+      "category": "productivity"
     }
-  ]
+  ],
+  "categories": {
+    "communication": {
+      "name": "Comunicação",
+      "color": "#667eea",
+      "icon": "📧"
+    },
+    "productivity": {
+      "name": "Produtividade",
+      "color": "#10b981",
+      "icon": "📊"
+    },
+    "security": {
+      "name": "Segurança",
+      "color": "#ef4444",
+      "icon": "🔒"
+    },
+    "finance": {
+      "name": "Finanças",
+      "color": "#f59e0b",
+      "icon": "💰"
+    },
+    "storage": {
+      "name": "Armazenamento",
+      "color": "#8b5cf6",
+      "icon": "💾"
+    }
+  }
 }
