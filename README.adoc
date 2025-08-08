@@ -30,17 +30,6 @@ Por quê? Por que não? Mas não era só salvar nos favoritos? Sim.
 https://account.proton.me/apps
 
 
-== Funcionalidades
-
-- Grid 3x3 personalizável - URLs no json
-- Possibilidade de adicionar ícones, categorias e descrições para cada link
-- Status de conexão (online/offline) e quantidade de apps configurados
-- Temas visuais customizáveis
-- Links rápidos para status dos serviços e download de apps oficiais
-- Configurações salvas via `chrome.storage.sync`
-- Atalho de teclado (Ctrl+Shift+L) para abrir o launcher
-- Suporte a múltiplos navegadores baseados em Chromium
-
 == Instalação
 
 . Baixe ou clone este repositório.
@@ -57,8 +46,6 @@ project/
 ├── config                   # arquivos de configuração
 │   ├── apps.json
 │   └── settings.json
-├── storage                  # gerenciamento de armazenamento
-|    └── storage.js
 ├── popup                    # interface do launcher
 │   ├── popup.css
 │   ├── popup.html
