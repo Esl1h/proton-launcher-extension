@@ -65,7 +65,8 @@ project/
 
 == Configuração
 
-Edite os arquivos em `config/` para personalizar os apps e preferências padrão. As configurações do usuário são salvas automaticamente.
+Edite os arquivos em `config/` para personalizar os apps e preferências padrão. 
+As configurações do usuário são salvas automaticamente.
 
 == Atalhos
 
