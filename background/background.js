@@ -1,21 +1,20 @@
 chrome.runtime.onInstalled.addListener((details) => {
-//   if (details.reason === 'install') {
-//     initializeDefaultSettings();
-//   }
-// });
-
-// async function initializeDefaultSettings() {
-//   try {
-//     const result = await chrome.storage.sync.get(['userApps', 'userSettings']);
-//     // Se não há configurações do usuário, não faz nada
-//   } catch (error) {}
-// }
+  // Inicialização limpa
 });
 
 chrome.commands?.onCommand.addListener((command) => {
-  switch (command) {
-    case 'open-launcher':
-      chrome.action.openPopup();
-      break;
+  if (command === 'open-launcher') {
+    chrome.action.openPopup();
+  }
+});
+
+// Adicionar cache para recursos estáticos
+self.addEventListener('fetch', (event) => {
+  if (event.request.url.includes('config/')) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request);
+      })
+    );
   }
 });

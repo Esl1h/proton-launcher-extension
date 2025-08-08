@@ -96,13 +96,13 @@ class WebAppLauncher {
     
     if (app) {
       item.innerHTML = `
-        <img class="app-icon" src="${app.icon}" alt="${app.title}" 
+        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}" 
              onerror="this.src='${this.getDefaultIcon()}'">
-        <div class="app-title">${app.title}</div>
+        <div class="app-title">${this.sanitizeHtml(app.title)}</div>
         ${app.description ? `` : ''}
       `;
       // To show description in each icon (line above)
-      //  ${app.description ? `<div class="app-description">${app.description}</div>` : ''}
+      //  ${app.description ? `<div class="app-description">${this.sanitizeHtml(app.description)}</div>` : ''}
       //
       item.addEventListener('click', () => this.openApp(app));
     } else {
@@ -114,6 +114,10 @@ class WebAppLauncher {
   }
 
   async openApp(app) {
+    if (!this.validateUrl(app.url)) {
+      this.updateStatusLine(1, 'URL inválida', 'error');
+      return;
+    }
     try {
       await chrome.tabs.create({
         url: app.url,
@@ -209,6 +213,21 @@ class WebAppLauncher {
 
   openSettings() {
     alert('Configurações em desenvolvimento!');
+  }
+
+  sanitizeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  validateUrl(url) {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.protocol === 'https:' && urlObj.hostname.includes('proton');
+    } catch {
+      return false;
+    }
   }
 }
 

@@ -8,8 +8,7 @@
   "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",
   "permissions": [
     "storage",
-    "tabs",
-    "alarms"
+    "tabs"
   ],
   "action": {
     "default_popup": "popup/popup.html",
@@ -40,6 +39,6 @@
   //"default_locale": "pt_BR", // future use for translations
   "minimum_chrome_version": "100",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' https: data:; connect-src 'self' https:;"
   }
 }
