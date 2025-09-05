@@ -1,15 +1,12 @@
 {
   "ui": {
     "theme": "gradient",
-    "grid_size": 3,
-    "show_categories": true
+    "grid_size": 3
   },
   "behavior": {
-    "open_as_webapp": true,
     "close_popup_on_launch": true
   },
   "status": {
-    "show_status": true,
     "update_interval": 30000
   },
   "themes": {

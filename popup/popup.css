@@ -6,8 +6,8 @@
 
 body {
   width: 320px;
-  height: 450px; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+  height: 450px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #333;
@@ -24,8 +24,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px; 
-  flex-shrink: 0; 
+  margin-bottom: 32px;
+  flex-shrink: 0;
 }
 
 .proton-logo {
@@ -51,7 +51,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 18px; 
+  gap: 18px;
   width: 240px;
   height: 240px;
 }
@@ -65,7 +65,7 @@ body {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 6px; 
+  padding: 6px;
   text-decoration: none;
   color: inherit;
   position: relative;
@@ -90,14 +90,14 @@ body {
 }
 
 .app-icon {
-  width: 28px; 
+  width: 28px;
   height: 28px;
   margin-bottom: 4px;
   border-radius: 6px;
 }
 
 .app-title {
-  font-size: 9px; 
+  font-size: 9px;
   font-weight: 500;
   text-align: center;
   line-height: 1.2;
@@ -107,15 +107,9 @@ body {
   white-space: nowrap;
 }
 
-.app-category {
-  font-size: 7px;
-  margin-top: 2px;
-  opacity: 0.8;
-}
-
 .status-section {
-  margin-top: 12px; 
-  padding: 8px; 
+  margin-top: 12px;
+  padding: 8px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   backdrop-filter: blur(10px);
@@ -123,9 +117,9 @@ body {
 }
 
 .status-line {
-  font-size: 10px; 
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 3px; 
+  margin-bottom: 3px;
   display: flex;
   align-items: center;
 }
@@ -135,10 +129,10 @@ body {
 }
 
 .status-indicator {
-  width: 5px; 
+  width: 5px;
   height: 5px;
   border-radius: 50%;
-  margin-right: 5px; 
+  margin-right: 5px;
   background: #4ade80;
 }
 
@@ -158,7 +152,7 @@ body {
 
 .settings-button {
   position: absolute;
-  top: 6px; 
+  top: 6px;
   right: 6px;
   display: flex;
   gap: 4px;
@@ -168,9 +162,9 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 6px;
-  padding: 4px; 
+  padding: 4px;
   cursor: pointer;
-  font-size: 12px; 
+  font-size: 12px;
   transition: background 0.2s ease;
 }
 

@@ -9,18 +9,18 @@ class WebAppLauncher {
   async init() {
     const startTime = performance.now();
     try {
-      this.updateStatusLine(1, 'Carregando configurações...', 'warning');
+      this.updateStatusLine(1, 'loading configs...', 'warning');
       await this.loadConfigurations();
       this.renderGrid();
       this.setupEventListeners();
       this.applyTheme();
       this.updateStatus();
       const loadTime = performance.now() - startTime;
-      this.updateStatusLine(1, `Carregado em ${loadTime.toFixed(1)}ms`, 'success');
+      this.updateStatusLine(1, `loaded on ${loadTime.toFixed(1)}ms`, 'success');
       const interval = this.settings.status?.update_interval || 30000;
       setInterval(() => this.updateStatus(), interval);
     } catch (error) {
-      this.updateStatusLine(1, 'Erro ao carregar', 'error');
+      this.updateStatusLine(1, 'Error on load', 'error');
       this.updateStatusLine(2, '', 'error');
     }
   }
@@ -29,7 +29,7 @@ class WebAppLauncher {
     if (this.configCache.has(configFile)) {
       return this.configCache.get(configFile);
     }
-    
+
     const url = chrome.runtime.getURL(`config/${configFile}`);
     const response = await fetch(url);
     const config = await response.json();
@@ -42,10 +42,10 @@ class WebAppLauncher {
       this.loadConfig('apps.json'),
       this.loadConfig('settings.json')
     ]);
-    
+
     this.apps = appsConfig.apps || [];
     this.settings = settingsConfig || {};
-    
+
     const userApps = await this.loadUserConfig();
     if (userApps && userApps.length > 0) {
       this.mergeUserApps(userApps);
@@ -77,11 +77,11 @@ class WebAppLauncher {
   renderGrid() {
     const grid = document.getElementById('appGrid');
     if (!grid) return;
-    
+
     grid.innerHTML = '';
     const gridSize = this.settings.ui?.grid_size || 3;
     const totalSlots = gridSize * gridSize;
-    
+
     for (let i = 0; i < totalSlots; i++) {
       const app = this.apps.find(app => app.position === i);
       const item = this.createAppItem(app, i);
@@ -93,29 +93,25 @@ class WebAppLauncher {
     const item = document.createElement('div');
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
-    
+
     if (app) {
       item.innerHTML = `
-        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}" 
+        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}"
              onerror="this.src='${this.getDefaultIcon()}'">
         <div class="app-title">${this.sanitizeHtml(app.title)}</div>
-        ${app.description ? `` : ''}
       `;
-      // To show description in each icon (line above)
-      //  ${app.description ? `<div class="app-description">${this.sanitizeHtml(app.description)}</div>` : ''}
-      //
       item.addEventListener('click', () => this.openApp(app));
     } else {
       item.innerHTML = '<div class="app-title">+</div>';
       item.addEventListener('click', () => this.openSettings(position));
     }
-    
+
     return item;
   }
 
   async openApp(app) {
     if (!this.validateUrl(app.url)) {
-      this.updateStatusLine(1, 'URL inválida', 'error');
+      this.updateStatusLine(1, 'invalid URL', 'error');
       return;
     }
     try {
@@ -137,7 +133,7 @@ class WebAppLauncher {
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
-    
+
     if (settingsBtn) {
       settingsBtn.addEventListener('click', () => this.openSettings());
     }
@@ -161,15 +157,15 @@ class WebAppLauncher {
   }
 
   async reloadConfigurations() {
-    this.updateStatusLine(1, 'Recarregando...', 'warning');
+    this.updateStatusLine(1, 'loading...', 'warning');
     try {
       this.configCache.clear();
       await this.loadConfigurations();
       this.renderGrid();
       this.applyTheme();
-      this.updateStatusLine(1, 'Configurações recarregadas!', 'success');
+      this.updateStatusLine(1, 'configs loaded!', 'success');
     } catch (error) {
-      this.updateStatusLine(1, 'Erro ao recarregar', 'error');
+      this.updateStatusLine(1, 'error on loading', 'error');
     }
   }
 
@@ -195,7 +191,7 @@ class WebAppLauncher {
       const statusType = online ? 'success' : 'warning';
       this.updateStatusLine(1, `Status: ${statusText}`, statusType);
       const configuredApps = this.apps.length;
-      this.updateStatusLine(2, `${configuredApps}/9 apps configurados`);
+      this.updateStatusLine(2, `${configuredApps}/9 apps sets`);
     } catch (error) {
       this.updateStatusLine(2, '', 'error');
     }
@@ -212,7 +208,7 @@ class WebAppLauncher {
   }
 
   openSettings() {
-    alert('Configurações em desenvolvimento!');
+    alert('On development!');
   }
 
   sanitizeHtml(text) {
