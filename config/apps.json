@@ -35,7 +35,7 @@
       "icon": "https://drive.proton.me/assets/favicon.ico",
       "position": 4,
       "description": "Armazenamento em nuvem criptografado"
-    },    
+    },
     {
       "title": "VPN",
       "url": "https://account.protonvpn.com/dashboardV2#VpnDownloadAndInfoSection",
@@ -45,7 +45,7 @@
     },
     {
       "title": "SimpleLogin",
-      "url": "https://app.simplelogin.io",
+      "url": "https://app.simplelogin.io/auth/login?next=%2Fdashboard%2F%3F",
       "icon": "https://app.simplelogin.io/favicon.ico",
       "position": 6,
       "description": "Aliases de email para proteção"

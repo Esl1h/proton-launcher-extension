@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Proton Launcher (unofficial)",
   "short_name": "ProtonLauncher",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Fast launcher on grid to Proton webapps (unofficial)",
   "author": "Esli Silva",
   "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",

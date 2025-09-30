@@ -220,7 +220,9 @@ class WebAppLauncher {
   validateUrl(url) {
     try {
       const urlObj = new URL(url);
-      return urlObj.protocol === 'https:' && urlObj.hostname.includes('proton');
+      const allowedDomains = ['proton', 'simplelogin', 'standardnotes'];
+      return urlObj.protocol === 'https:' &&
+            allowedDomains.some(domain => urlObj.hostname.includes(domain));
     } catch {
       return false;
     }
