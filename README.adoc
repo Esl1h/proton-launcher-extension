@@ -1,77 +1,247 @@
 = Proton Launcher Extension
+:toc: macro
+:toc-title: Table of Contents
+:toclevels: 2
 
-Uma extensão para Chrome/Brave/Chromium que permite lançar rapidamente WebApps Proton a partir de um grid personalizável, com status de conexão e atalhos.
-
+A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with real-time connection status and keyboard shortcuts.
 
 ++++
 <div align="center">
-  <img src="docs/screenshot.png" alt="Screenshot do Proton Launcher Extension" width="400"/>
+  <img src="docs/screenshot.png" alt="Proton Launcher Extension Screenshot" width="400"/>
 </div>
 </br>
-<img src="docs/on-brave.png" alt="Screenshot do Proton Launcher Extension"/>
+<img src="docs/on-brave.png" alt="Proton Launcher Extension on Brave"/>
 ++++
 
 [IMPORTANT]
 ====
-Não afiliado ao Proton AG.
+*Not affiliated with Proton AG.*
 
-Esta extensão é um projeto independente, sem vínculos com a Proton AG ou seus produtos oficiais.
+This extension is an independent project, with no ties to Proton AG or its official products.
 
-Esta extensão é para o acesso a serviços Proton, somente um popup com os links para os serviços Proton.
+This extension provides quick access to Proton services through a simple popup with links.
 ====
 
 [NOTE]
 ====
-Pode ser usada como modelo para criar uma extensão personalizada para acessar qualquer outro serviço web.
+Can be used as a template to create a custom extension to access any other web service.
 
-Por quê? Por que não? Mas não era só salvar nos favoritos? Sim.
+Why? Why not? But couldn't you just save them in bookmarks? Yes.
 ====
+
+toc::[]
+
+== Features
+
+* *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
+* *Real-time Status* - Online/offline indicator with automatic updates
+* *Keyboard Shortcut* - Open the launcher instantly with `Ctrl+Shift+L`
+* *Theme Support* - Modern gradient theme with customization options
+* *Cloud Sync* - User preferences sync across devices via Chrome Storage
+* *Performance Metrics* - Displays load time in milliseconds
+* *Auto-close* - Optionally closes popup after launching an app
+* *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
+* *Minimal Permissions* - Privacy-focused with no special permissions required
+
+== Pre-configured Apps
+
+The extension comes with 9 pre-configured apps from the Proton ecosystem:
+
+[cols="1,2,3"]
+|===
+|App |URL |Description
+
+|Mail
+|https://mail.proton.me
+|Encrypted email service
+
+|Calendar
+|https://calendar.proton.me
+|Secure calendar
+
+|Pass
+|https://pass.proton.me
+|Password manager
+
+|Wallet
+|https://wallet.proton.me
+|Bitcoin wallet
+
+|Drive
+|https://drive.proton.me
+|Cloud storage
+
+|VPN
+|https://account.protonvpn.com
+|VPN service dashboard
+
+|SimpleLogin
+|https://app.simplelogin.io
+|Email aliases service
+
+|Standard Notes
+|https://app.standardnotes.com
+|Encrypted notes
+
+|Lumo AI
+|https://lumo.proton.me
+|Proton AI assistant
+|===
+
+== Installation
+
+. Download or clone this repository
+. In Chrome/Brave, go to `chrome://extensions/` and enable *Developer mode*
+. Click "*Load unpacked*" and select the project folder
+
+== Shortcuts
+
+[cols="1,2"]
+|===
+|Shortcut |Action
+
+|`Ctrl+Shift+L`
+|Open the launcher popup
+|===
+
+== Configuration
+
+Edit the files in `config/` to customize apps and preferences.
+
+=== settings.json Options
+
+[source,json]
+----
+{
+  "theme": "gradient",
+  "grid_size": 3,
+  "close_popup_on_launch": true,
+  "update_interval": 30000
+}
+----
+
+[cols="1,1,2"]
+|===
+|Option |Default |Description
+
+|`theme`
+|`"gradient"`
+|Active theme name
+
+|`grid_size`
+|`3`
+|Grid dimensions (3 = 3x3 grid)
+
+|`close_popup_on_launch`
+|`true`
+|Auto-close popup after opening an app
+
+|`update_interval`
+|`30000`
+|Status update frequency in milliseconds
+|===
+
+=== Adding Custom Apps
+
+Edit `config/apps.json` to add or modify apps:
+
+[source,json]
+----
+{
+  "title": "My App",
+  "url": "https://example.com",
+  "icon": "https://example.com/favicon.ico",
+  "position": 0,
+  "description": "My custom app"
+}
+----
+
+=== Creating Custom Themes
+
+Add new themes in `config/settings.json`:
+
+[source,json]
+----
+{
+  "themes": {
+    "my-theme": {
+      "primary": "#1a1a2e",
+      "secondary": "#16213e",
+      "background": "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
+    }
+  }
+}
+----
+
+== Security & Permissions
+
+=== Minimal Permissions
+
+This extension operates with *zero explicit permissions*. It only uses:
+
+* `chrome.storage.sync` - For saving user preferences
+* `chrome.tabs` - For opening new tabs
+* `chrome.commands` - For keyboard shortcuts
+
+=== Security Features
+
+* *URL Whitelist* - Only allows URLs from approved domains (Proton, SimpleLogin, StandardNotes)
+* *HTTPS Only* - All URLs must use HTTPS protocol
+* *XSS Protection* - HTML sanitization for all user-facing content
+* *Content Security Policy* - Strict CSP preventing inline scripts
+
+== Project Structure
+
+----
+proton-launcher-extension/
+├── manifest.json            # Extension manifest (Manifest V3)
+├── background/
+│   └── background.js        # Service worker for events
+├── config/
+│   ├── apps.json            # Default apps configuration
+│   └── settings.json        # UI and behavior settings
+├── popup/
+│   ├── popup.html           # Launcher interface
+│   ├── popup.css            # Styles
+│   └── popup.js             # Main application logic
+├── assets/
+│   ├── icons/               # Extension icons (16/48/128px)
+│   └── proton-logo.svg      # Proton branding
+├── docs/                    # Screenshots and documentation
+└── README.adoc              # This file
+----
+
+== Technology Stack
+
+* *JavaScript* - Pure vanilla JS (ES6+)
+* *Chrome Extensions* - Manifest V3
+* *Chrome Storage API* - For user preferences sync
+* *CSS3* - Modern styling with CSS custom properties
 
 == Links
 
-https://account.proton.me/apps
+* https://account.proton.me/apps[Proton Apps]
+* https://status.proton.me[Proton Status]
 
+== Contributing
 
-== Instalação
+Contributions are welcome! Feel free to:
 
-. Baixe ou clone este repositório.
-. No Chrome/Brave, acesse `chrome://extensions/` e ative o modo de desenvolvedor.
-. Clique em "Carregar sem compactação" e selecione a pasta do projeto.
+. Fork the repository
+. Create a feature branch (`git checkout -b feature/amazing-feature`)
+. Commit your changes (`git commit -m 'Add amazing feature'`)
+. Push to the branch (`git push origin feature/amazing-feature`)
+. Open a Pull Request
 
-== Estrutura do Projeto
+== Author
 
-----
-project/
-├── manifest.json            # arquivo de manifesto da extensão
-├── background               # service worker para eventos e integrações
-│   └── background.js
-├── config                   # arquivos de configuração
-│   ├── apps.json
-│   └── settings.json
-├── popup                    # interface do launcher
-│   ├── popup.css
-│   ├── popup.html
-│   └── popup.js
-├── assets                   # icones e logos
-│   ├── icons
-│   │   ├── icon128.png
-│   │   ├── icon16.png
-│   │   └── icon48.png
-│   └── proton-logo.svg
-├── README.adoc              # Este readme ;-)
-└── docs                     # documentação adicional
+*Esli Silva* - https://github.com/Esl1h[@Esl1h]
 
+== License
 
-----
+This project is open source. See the repository for license details.
 
+== Version History
 
-== Configuração
-
-Edite os arquivos em `config/` para personalizar os apps e preferências padrão. 
-As configurações do usuário são salvas automaticamente.
-
-== Atalhos
-
-- `Ctrl+Shift+L` – Abre o launcher rapidamente
-
-
+* *1.4.1* - URL fixes
+* *1.4.0* - Initial public release
