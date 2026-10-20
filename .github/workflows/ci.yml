@@ -31,7 +31,10 @@ jobs:
             const bad = ids.filter((id, i) => !id || ids.indexOf(id) !== i);
             if (bad.length) { console.error("Missing or duplicate app ids:", bad); process.exit(1); }'
       - name: Lint for Firefox (addons.mozilla.org rules)
-        run: npx --yes web-ext@8.10.0 lint --source-dir . --ignore-files 'docs/**' '.github/**' --warnings-as-errors
+        # Install outside the source dir, without lifecycle scripts, instead of npx.
+        run: |
+          npm install --prefix "$RUNNER_TEMP/web-ext" --ignore-scripts --no-audit --no-fund web-ext@8.10.0
+          "$RUNNER_TEMP/web-ext/node_modules/.bin/web-ext" lint --source-dir . --ignore-files 'docs/**' '.github/**' --warnings-as-errors
 
   release:
     needs: validate
