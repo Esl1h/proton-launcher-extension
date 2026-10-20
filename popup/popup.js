@@ -52,8 +52,9 @@ class WebAppLauncher {
     if (!grid) return;
 
     grid.replaceChildren();
-    const gridSize = this.settings.ui?.grid_size || 3;
+    const gridSize = this.getGridSize();
     const totalSlots = gridSize * gridSize;
+    grid.style.setProperty('--grid-size', gridSize);
 
     for (let i = 0; i < totalSlots; i++) {
       const app = this.apps.find(app => app.position === i);
@@ -84,6 +85,10 @@ class WebAppLauncher {
     }
 
     return item;
+  }
+
+  getGridSize() {
+    return this.settings.ui?.grid_size || 3;
   }
 
   async openApp(app) {
@@ -144,12 +149,8 @@ class WebAppLauncher {
 
   applyTheme() {
     const theme = this.settings.themes?.[this.settings.ui?.theme || 'gradient'];
-    if (theme) {
-      document.documentElement.style.setProperty('--primary-color', theme.primary);
-      document.documentElement.style.setProperty('--secondary-color', theme.secondary);
-      if (theme.background) {
-        document.body.style.background = theme.background;
-      }
+    if (theme?.background) {
+      document.body.style.background = theme.background;
     }
   }
 
@@ -164,7 +165,8 @@ class WebAppLauncher {
       const statusType = online ? 'success' : 'warning';
       this.updateStatusLine(1, `Status: ${statusText}`, statusType);
       const configuredApps = this.apps.length;
-      this.updateStatusLine(2, `${configuredApps}/9 apps sets`);
+      const totalSlots = this.getGridSize() ** 2;
+      this.updateStatusLine(2, `${configuredApps}/${totalSlots} apps sets`);
     } catch (error) {
       this.updateStatusLine(2, '', 'error');
     }

@@ -166,8 +166,6 @@ Add new themes in `config/settings.json`:
 {
   "themes": {
     "my-theme": {
-      "primary": "#1a1a2e",
-      "secondary": "#16213e",
       "background": "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
     }
   }

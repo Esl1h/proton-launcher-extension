@@ -49,8 +49,8 @@ body {
 
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--grid-size, 3), 1fr);
+  grid-template-rows: repeat(var(--grid-size, 3), 1fr);
   gap: 18px;
   width: 240px;
   height: 240px;
