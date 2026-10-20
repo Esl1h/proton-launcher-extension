@@ -149,11 +149,13 @@ Edit `config/apps.json` to add or modify apps:
 {
   "title": "My App",
   "url": "https://example.com",
-  "icon": "https://example.com/favicon.ico",
+  "icon": "/assets/apps/my-app.png",
   "position": 0,
   "description": "My custom app"
 }
 ----
+
+Icons must be bundled under `assets/apps/`: the Content Security Policy blocks remote images.
 
 === Creating Custom Themes
 
@@ -186,7 +188,11 @@ This extension operates with *zero explicit permissions*. It only uses:
 * *URL Whitelist* - Only allows URLs from approved domains (Proton, SimpleLogin, StandardNotes)
 * *HTTPS Only* - All URLs must use HTTPS protocol
 * *XSS Protection* - UI is built with DOM APIs and `textContent`, never `innerHTML`
-* *Content Security Policy* - Strict CSP preventing inline scripts
+* *Content Security Policy* - Strict CSP preventing inline scripts and remote images or requests
+
+=== Privacy
+
+The extension collects no data and makes no network requests on its own. App icons are bundled in the package, so opening the popup does not contact any server. Network traffic only happens when you click an app or link, which opens that site in a new tab.
 
 == Project Structure
 
@@ -203,6 +209,7 @@ proton-launcher-extension/
 │   ├── popup.css            # Styles
 │   └── popup.js             # Main application logic
 ├── assets/
+│   ├── apps/                # Bundled app icons
 │   ├── icons/               # Extension icons (16/48/128px)
 │   └── proton-logo.svg      # Proton branding
 ├── docs/                    # Screenshots and documentation

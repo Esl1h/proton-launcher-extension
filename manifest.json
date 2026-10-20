@@ -34,6 +34,6 @@
   },
   "minimum_chrome_version": "100",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' https: data:; connect-src 'self' https:;"
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data:; connect-src 'self';"
   }
 }
