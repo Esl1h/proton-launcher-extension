@@ -196,8 +196,6 @@ The extension collects no data and makes no network requests on its own. App ico
 ----
 proton-launcher-extension/
 ├── manifest.json            # Extension manifest (Manifest V3)
-├── background/
-│   └── background.js        # Service worker for events
 ├── config/
 │   ├── apps.json            # Default apps configuration
 │   └── settings.json        # UI and behavior settings
