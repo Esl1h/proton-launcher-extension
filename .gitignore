@@ -39,3 +39,7 @@ Thumbs.db
 *.p12
 *.key
 *.pem
+
+# Packaged builds (published as release assets)
+*.crx
+*.zip
