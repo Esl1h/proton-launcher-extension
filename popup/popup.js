@@ -69,10 +69,13 @@ class WebAppLauncher {
 
     if (app) {
       item.innerHTML = `
-        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}"
-             onerror="this.src='${this.getDefaultIcon()}'">
+        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}">
         <div class="app-title">${this.sanitizeHtml(app.title)}</div>
       `;
+      // Inline onerror handlers are blocked by the extension CSP.
+      item.querySelector('.app-icon').addEventListener('error', (e) => {
+        e.target.src = this.getDefaultIcon();
+      }, { once: true });
       item.addEventListener('click', () => this.openApp(app));
     } else {
       item.innerHTML = '<div class="app-title">+</div>';
