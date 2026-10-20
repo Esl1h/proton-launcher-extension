@@ -100,7 +100,14 @@ class WebAppLauncher {
       icon.src = app.icon;
       title.textContent = app.title;
       item.append(icon, title);
-      item.addEventListener('click', () => this.openApp(app));
+      item.addEventListener('click', (e) => this.openApp(app, e.ctrlKey || e.metaKey));
+      item.addEventListener('auxclick', (e) => {
+        if (e.button === 1) this.openApp(app, true);
+      });
+      // Avoid the middle-click autoscroll cursor on platforms that enable it.
+      item.addEventListener('mousedown', (e) => {
+        if (e.button === 1) e.preventDefault();
+      });
     }
 
     return item;
@@ -110,7 +117,7 @@ class WebAppLauncher {
     return this.settings.ui?.grid_size || 3;
   }
 
-  async openApp(app) {
+  async openApp(app, background = false) {
     if (!this.validateUrl(app.url)) {
       this.updateStatusLine(1, this.t('invalidUrl'), 'error');
       return;
@@ -118,8 +125,13 @@ class WebAppLauncher {
     try {
       await chrome.tabs.create({
         url: app.url,
-        active: true
+        active: !background
       });
+      if (background) {
+        // Keep the popup open so several apps can be queued in a row.
+        this.updateStatusLine(1, this.t('openedInBackground', app.title));
+        return;
+      }
       this.updateStatusLine(1, this.t('opening', app.title));
       if (this.settings.behavior?.close_popup_on_launch !== false) {
         window.close();

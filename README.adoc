@@ -42,6 +42,7 @@ toc::[]
 * *Theme Support* - Modern gradient theme with customization options
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
+* *Background Tabs* - `Ctrl`/`Cmd` + click or middle-click opens an app without leaving the current tab
 * *Localized* - English and Brazilian Portuguese, following the browser language
 * *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
 * *Minimal Permissions* - Privacy-focused with no special permissions required
@@ -109,7 +110,12 @@ Install it from the https://chromewebstore.google.com/detail/proton-launcher-uno
 
 |`Ctrl+Shift+L`
 |Open the launcher popup
+
+|`Ctrl`/`Cmd` + click, or middle-click
+|Open the app in a background tab and keep the popup open
 |===
+
+If `Ctrl+Shift+L` does not open the popup, another extension already uses it (browsers skip a suggested shortcut that conflicts). Set a different one in `chrome://extensions/shortcuts`.
 
 == Configuration
 

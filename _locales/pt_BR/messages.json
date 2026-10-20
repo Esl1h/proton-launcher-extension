@@ -24,6 +24,10 @@
     "message": "Abrindo $APP$...",
     "placeholders": { "app": { "content": "$1" } }
   },
+  "openedInBackground": {
+    "message": "$APP$ aberto em segundo plano",
+    "placeholders": { "app": { "content": "$1" } }
+  },
   "invalidUrl": { "message": "URL inválida" },
   "reloading": { "message": "Recarregando..." },
   "reloaded": { "message": "Configurações recarregadas" },
