@@ -7,7 +7,9 @@
   "description": "__MSG_extDescription__",
   "author": "Esli Silva",
   "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",
-  "permissions": [],
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "__MSG_actionTitle__",
@@ -16,6 +18,10 @@
       "48": "assets/icons/icon48.png",
       "128": "assets/icons/icon128.png"
     }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
   },
   "commands": {
     "_execute_action": {

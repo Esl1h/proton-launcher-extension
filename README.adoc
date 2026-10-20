@@ -39,13 +39,14 @@ toc::[]
 * *Network Status* - Online/offline indicator for the local connection
 * *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
 * *Keyboard Shortcut* - Open the launcher instantly with `Alt+Shift+L`
-* *Light and Dark Themes* - Proton's own Snow and Carbon colors, following the system preference
+* *Light and Dark Themes* - Proton's own Snow and Carbon colors, automatic or chosen in the settings
+* *Settings Page* - Drag apps to reorder them, hide the ones you do not use and pick a theme; preferences sync across devices through the browser
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
 * *Background Tabs* - `Ctrl`/`Cmd` + click or middle-click opens an app without leaving the current tab
 * *Localized* - English and Brazilian Portuguese, following the browser language
 * *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
-* *Minimal Permissions* - Privacy-focused with no special permissions required
+* *Minimal Permissions* - Only `storage`, which shows no install warning
 
 == Pre-configured Apps
 
@@ -131,7 +132,9 @@ If `Alt+Shift+L` does not open the popup, the browser or another extension alrea
 
 == Configuration
 
-Edit the files in `config/` to customize apps and preferences.
+Most users only need the settings page: click the gear icon in the popup, or open the extension's *Options*. There you can reorder apps by dragging, hide apps and choose the theme.
+
+To change the bundled defaults, edit the files in `config/`.
 
 === settings.json Options
 
@@ -174,13 +177,13 @@ Edit `config/apps.json` to add or modify apps:
 {
   "title": "My App",
   "url": "https://example.com",
+  "id": "my-app",
   "icon": "/assets/apps/my-app.png",
-  "position": 0,
   "description": "My custom app"
 }
 ----
 
-Icons must be bundled under `assets/apps/`: the Content Security Policy blocks remote images.
+The `id` must be unique and stable, since saved preferences refer to it. The order of the array is the default grid order. Icons must be bundled under `assets/apps/`: the Content Security Policy blocks remote images. The URL domain must also be in the whitelist of `validateUrl` in `popup/popup.js`.
 
 === Theme Colors
 
@@ -190,10 +193,11 @@ Light and dark colors are CSS variables in `common/theme.css`, copied from Proto
 
 === Minimal Permissions
 
-This extension operates with *zero explicit permissions*. It only uses:
+The only permission requested is `storage`, which does not trigger an install warning:
 
-* `chrome.tabs` - For opening new tabs
-* `chrome.commands` - For keyboard shortcuts
+* `chrome.storage.sync` (`storage` permission) - For the settings (app order, hidden apps, theme)
+* `chrome.tabs` (no permission needed) - For opening new tabs
+* `chrome.commands` (no permission needed) - For keyboard shortcuts
 
 === Security Features
 
@@ -204,7 +208,7 @@ This extension operates with *zero explicit permissions*. It only uses:
 
 === Privacy
 
-The extension collects no data. App icons are bundled in the package. The only request it makes on its own is one anonymous call to the public `https://status.proton.me/api/v2/status.json` endpoint each time the popup opens, without cookies, to color the service status badge. Any other traffic only happens when you click an app or link, which opens that site in a new tab.
+The extension collects no data. App icons are bundled in the package. Settings are stored with `chrome.storage.sync`, so the browser syncs them across your devices if browser sync is on; they never leave the browser otherwise. The only request it makes on its own is one anonymous call to the public `https://status.proton.me/api/v2/status.json` endpoint each time the popup opens, without cookies, to color the service status badge. Any other traffic only happens when you click an app or link, which opens that site in a new tab.
 
 == Project Structure
 
@@ -213,6 +217,7 @@ proton-launcher-extension/
 ├── manifest.json            # Extension manifest (Manifest V3)
 ├── _locales/                # UI strings (en, pt_BR)
 ├── common/
+│   ├── prefs.js             # Settings shared by popup and options
 │   └── theme.css            # Light and dark theme colors
 ├── config/
 │   ├── apps.json            # Default apps configuration
@@ -221,6 +226,7 @@ proton-launcher-extension/
 │   ├── popup.html           # Launcher interface
 │   ├── popup.css            # Styles
 │   └── popup.js             # Main application logic
+├── options/                 # Settings page (reorder, hide, theme)
 ├── assets/
 │   ├── apps/                # Bundled app icons
 │   ├── icons/               # Extension icons (16/48/128px)

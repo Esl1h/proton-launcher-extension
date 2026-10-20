@@ -82,12 +82,17 @@ body {
 .app-item.empty {
   background: transparent;
   border: 2px dashed var(--border-norm);
-  cursor: default;
+  color: var(--text-hint);
 }
 
 .app-item.empty:hover {
   transform: none;
   box-shadow: none;
+  color: var(--text-norm);
+}
+
+.app-item.empty .app-title {
+  font-size: 18px;
 }
 
 .app-icon {

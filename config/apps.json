@@ -1,88 +1,87 @@
 {
   "apps": [
     {
+      "id": "mail",
       "title": "Mail",
       "url": "https://mail.proton.me",
       "icon": "/assets/apps/mail.png",
-      "position": 0,
       "description": "Encrypted and private email"
     },
     {
+      "id": "calendar",
       "title": "Calendar",
       "url": "https://calendar.proton.me",
       "icon": "/assets/apps/calendar.png",
-      "position": 1,
       "description": "Private and encrypted calendar"
-
     },
     {
+      "id": "pass",
       "title": "Pass",
       "url": "https://pass.proton.me",
       "icon": "/assets/apps/pass.png",
-      "position": 2,
       "description": "Secure password manager"
     },
     {
+      "id": "wallet",
       "title": "Wallet",
       "url": "https://wallet.proton.me",
       "icon": "/assets/apps/wallet.png",
-      "position": 3,
       "description": "Self-custodial Bitcoin wallet"
     },
     {
+      "id": "drive",
       "title": "Drive",
       "url": "https://drive.proton.me",
       "icon": "/assets/apps/drive.png",
-      "position": 4,
       "description": "Encrypted cloud storage"
     },
     {
+      "id": "vpn",
       "title": "VPN",
       "url": "https://account.protonvpn.com/dashboardV2#VpnDownloadAndInfoSection",
       "icon": "/assets/apps/vpn.png",
-      "position": 5,
       "description": "VPN"
     },
     {
+      "id": "simplelogin",
       "title": "SimpleLogin",
       "url": "https://app.simplelogin.io/auth/login?next=%2Fdashboard%2F%3F",
       "icon": "/assets/apps/simplelogin.png",
-      "position": 6,
       "description": "Email aliases for protection"
     },
     {
+      "id": "notes",
       "title": "Notes",
       "url": "https://app.standardnotes.com",
       "icon": "/assets/apps/notes.png",
-      "position": 7,
       "description": "Encrypted and private notes"
     },
     {
+      "id": "ai",
       "title": "AI",
       "url": "https://lumo.proton.me/",
       "icon": "/assets/apps/ai.png",
-      "position": 8,
       "description": "Private AI assistant"
     },
     {
+      "id": "docs",
       "title": "Docs",
       "url": "https://docs.proton.me",
       "icon": "/assets/apps/docs.png",
-      "position": 9,
       "description": "Encrypted collaborative documents"
     },
     {
+      "id": "sheets",
       "title": "Sheets",
       "url": "https://sheets.proton.me",
       "icon": "/assets/apps/sheets.png",
-      "position": 10,
       "description": "Encrypted spreadsheets"
     },
     {
+      "id": "meet",
       "title": "Meet",
       "url": "https://meet.proton.me",
       "icon": "/assets/apps/meet.png",
-      "position": 11,
       "description": "Encrypted video calls"
     }
   ]

@@ -56,12 +56,15 @@ class WebAppLauncher {
   }
 
   async loadConfigurations() {
-    const [appsConfig, settingsConfig] = await Promise.all([
+    const [appsConfig, settingsConfig, prefs] = await Promise.all([
       this.loadConfig('apps.json'),
-      this.loadConfig('settings.json')
+      this.loadConfig('settings.json'),
+      LauncherPrefs.get()
     ]);
 
-    this.apps = appsConfig.apps || [];
+    LauncherPrefs.applyTheme(prefs.theme);
+    this.apps = LauncherPrefs.sortApps(appsConfig.apps || [], prefs)
+      .filter(app => !prefs.hidden.includes(app.id));
     this.settings = settingsConfig || {};
   }
 
@@ -75,9 +78,9 @@ class WebAppLauncher {
     grid.style.setProperty('--grid-columns', columns);
     grid.style.setProperty('--grid-rows', rows);
 
+    // Hidden apps are already filtered out, so visible ones fill the first slots.
     for (let i = 0; i < totalSlots; i++) {
-      const app = this.apps.find(app => app.position === i);
-      const item = this.createAppItem(app, i);
+      const item = this.createAppItem(this.apps[i], i);
       grid.appendChild(item);
     }
   }
@@ -86,6 +89,15 @@ class WebAppLauncher {
     const item = document.createElement('div');
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
+
+    if (!app) {
+      const plus = document.createElement('div');
+      plus.className = 'app-title';
+      plus.textContent = '+';
+      item.append(plus);
+      item.title = this.t('settingsTitle');
+      item.addEventListener('click', () => this.openSettings());
+    }
 
     if (app) {
       const title = document.createElement('div');
@@ -145,10 +157,14 @@ class WebAppLauncher {
   }
 
   setupEventListeners() {
+    const settingsBtn = document.getElementById('settingsBtn');
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
 
+    if (settingsBtn) {
+      settingsBtn.addEventListener('click', () => this.openSettings());
+    }
     if (reloadBtn) {
       reloadBtn.addEventListener('click', () => this.reloadConfigurations());
     }
@@ -164,6 +180,11 @@ class WebAppLauncher {
         window.close();
       });
     }
+  }
+
+  openSettings() {
+    chrome.runtime.openOptionsPage();
+    window.close();
   }
 
   async reloadConfigurations() {
