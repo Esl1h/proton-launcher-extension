@@ -5,14 +5,18 @@
 
 A Chrome/Brave/Chromium and Firefox extension that allows you to quickly launch Proton WebApps from a customizable 3x4 grid, with connection status and keyboard shortcuts.
 
-https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Install from the Chrome Web Store]
-
 ++++
-<div align="center">
-  <img src="docs/screenshot.png" alt="Proton Launcher Extension Screenshot" width="400"/>
-</div>
-</br>
-<img src="docs/on-brave.png" alt="Proton Launcher Extension on Brave"/>
+<p align="center">
+  <a href="https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn"><img src="docs/badges/chrome-web-store.png" alt="Available in the Chrome Web Store" height="58"/></a>
+  &nbsp;&nbsp;
+  <a href="https://addons.mozilla.org/firefox/addon/proton-launcher-unofficial/"><img src="docs/badges/firefox-add-ons.svg" alt="Get the add-on for Firefox" height="58"/></a>
+</p>
+<p align="center">
+  <sub>Chrome, Brave, Edge, Vivaldi and other Chromium browsers &nbsp;|&nbsp; Firefox, Mullvad Browser and other Firefox-based browsers</sub>
+</p>
+<p align="center">
+  <img src="docs/screenshots/popup-dark.png" alt="Proton Launcher popup with the 3x4 grid of Proton apps" width="320"/>
+</p>
 ++++
 
 [IMPORTANT]
@@ -47,6 +51,19 @@ toc::[]
 * *Localized* - English and Brazilian Portuguese, following the browser language
 * *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
 * *Minimal Permissions* - Only `storage`, which shows no install warning
+
+== Screenshots
+
+++++
+<p align="center">
+  <img src="docs/screenshots/firefox-dark.webp" alt="Launcher open in Firefox, dark theme" width="49%"/>
+  <img src="docs/screenshots/firefox-light.webp" alt="Launcher open in Firefox, light theme" width="49%"/>
+</p>
+<p align="center">
+  <img src="docs/screenshots/brave-dark.webp" alt="Launcher open in Brave, dark theme" width="49%"/>
+  <img src="docs/screenshots/options.png" alt="Settings page to reorder and hide apps and choose the theme" width="49%"/>
+</p>
+++++
 
 == Pre-configured Apps
 
@@ -107,7 +124,8 @@ The extension comes with 12 pre-configured apps from the Proton ecosystem:
 
 == Installation
 
-Install it from the https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Chrome Web Store] (works in Chrome, Brave, Edge and other Chromium browsers).
+* *Chromium browsers* (Chrome, Brave, Edge, Vivaldi...): https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Chrome Web Store]
+* *Firefox and Firefox-based browsers* (Mullvad Browser...): https://addons.mozilla.org/firefox/addon/proton-launcher-unofficial/[Firefox Add-ons]
 
 === From source
 
@@ -242,7 +260,7 @@ proton-launcher-extension/
 │   ├── apps/                # Bundled app icons
 │   ├── icons/               # Extension icons (16/48/128px)
 │   └── proton-logo.svg      # Proton branding
-├── docs/                    # Screenshots and documentation
+├── docs/                    # Screenshots and store badges
 └── README.adoc              # This file
 ----
 
