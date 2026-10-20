@@ -1,14 +1,9 @@
 {
   "ui": {
-    "theme": "gradient",
-    "grid_size": 3
+    "grid_columns": 3,
+    "grid_rows": 4
   },
   "behavior": {
     "close_popup_on_launch": true
-  },
-  "themes": {
-    "gradient": {
-      "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-    }
   }
 }

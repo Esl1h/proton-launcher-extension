@@ -19,14 +19,17 @@ jobs:
           find . -name '*.json' -not -path './.git/*' -print0 \
             | xargs -0 -n1 node -e 'JSON.parse(require("fs").readFileSync(process.argv[1]))'
       - name: Check JavaScript syntax
-        run: find popup -name '*.js' -print0 | xargs -0 -n1 node --check
-      - name: Check that every referenced app icon exists
+        run: find popup options common -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Check app ids and icons
         run: |
           node -e '
             const fs = require("fs");
-            const missing = require("./config/apps.json").apps
-              .map(a => a.icon).filter(i => !fs.existsSync("." + i));
-            if (missing.length) { console.error("Missing icons:", missing); process.exit(1); }'
+            const apps = require("./config/apps.json").apps;
+            const missing = apps.map(a => a.icon).filter(i => !fs.existsSync("." + i));
+            if (missing.length) { console.error("Missing icons:", missing); process.exit(1); }
+            const ids = apps.map(a => a.id);
+            const bad = ids.filter((id, i) => !id || ids.indexOf(id) !== i);
+            if (bad.length) { console.error("Missing or duplicate app ids:", bad); process.exit(1); }'
 
   release:
     needs: validate
@@ -47,7 +50,7 @@ jobs:
       - name: Build package
         run: |
           zip -r "proton-launcher-extension-v${GITHUB_REF_NAME#v}.zip" \
-            manifest.json LICENSE _locales assets config popup
+            manifest.json LICENSE _locales assets common config options popup
       - name: Upload to GitHub release
         env:
           GH_TOKEN: ${{ github.token }}

@@ -34,5 +34,16 @@
   "reloadTitle": { "message": "Reload settings" },
   "servicesStatus": { "message": "Services status" },
   "statusUnavailable": { "message": "unavailable" },
-  "downloadApps": { "message": "Download official apps and extensions" }
+  "downloadApps": { "message": "Download official apps and extensions" },
+  "settingsTitle": { "message": "Settings" },
+  "optionsTitle": { "message": "Proton Launcher settings" },
+  "appsSection": { "message": "Apps" },
+  "appsHint": { "message": "Drag to reorder. Uncheck an app to hide it from the launcher." },
+  "showApp": { "message": "Show" },
+  "resetDefaults": { "message": "Restore defaults" },
+  "themeSection": { "message": "Theme" },
+  "themeAuto": { "message": "Automatic (system)" },
+  "themeLight": { "message": "Light" },
+  "themeDark": { "message": "Dark" },
+  "saved": { "message": "Saved" }
 }

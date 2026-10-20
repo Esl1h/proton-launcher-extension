@@ -34,5 +34,16 @@
   "reloadTitle": { "message": "Recarregar configurações" },
   "servicesStatus": { "message": "Status dos serviços" },
   "statusUnavailable": { "message": "indisponível" },
-  "downloadApps": { "message": "Baixar apps e extensões oficiais" }
+  "downloadApps": { "message": "Baixar apps e extensões oficiais" },
+  "settingsTitle": { "message": "Configurações" },
+  "optionsTitle": { "message": "Configurações do Proton Launcher" },
+  "appsSection": { "message": "Apps" },
+  "appsHint": { "message": "Arraste para reordenar. Desmarque um app para ocultá-lo do lançador." },
+  "showApp": { "message": "Exibir" },
+  "resetDefaults": { "message": "Restaurar padrão" },
+  "themeSection": { "message": "Tema" },
+  "themeAuto": { "message": "Automático (sistema)" },
+  "themeLight": { "message": "Claro" },
+  "themeDark": { "message": "Escuro" },
+  "saved": { "message": "Salvo" }
 }

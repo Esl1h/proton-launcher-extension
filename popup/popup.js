@@ -14,7 +14,6 @@ class WebAppLauncher {
       await this.loadConfigurations();
       this.renderGrid();
       this.setupEventListeners();
-      this.applyTheme();
       this.updateStatus();
       const loadTime = performance.now() - startTime;
       this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
@@ -57,12 +56,15 @@ class WebAppLauncher {
   }
 
   async loadConfigurations() {
-    const [appsConfig, settingsConfig] = await Promise.all([
+    const [appsConfig, settingsConfig, prefs] = await Promise.all([
       this.loadConfig('apps.json'),
-      this.loadConfig('settings.json')
+      this.loadConfig('settings.json'),
+      LauncherPrefs.get()
     ]);
 
-    this.apps = appsConfig.apps || [];
+    LauncherPrefs.applyTheme(prefs.theme);
+    this.apps = LauncherPrefs.sortApps(appsConfig.apps || [], prefs)
+      .filter(app => !prefs.hidden.includes(app.id));
     this.settings = settingsConfig || {};
   }
 
@@ -71,13 +73,14 @@ class WebAppLauncher {
     if (!grid) return;
 
     grid.replaceChildren();
-    const gridSize = this.getGridSize();
-    const totalSlots = gridSize * gridSize;
-    grid.style.setProperty('--grid-size', gridSize);
+    const { columns, rows } = this.getGridSize();
+    const totalSlots = columns * rows;
+    grid.style.setProperty('--grid-columns', columns);
+    grid.style.setProperty('--grid-rows', rows);
 
+    // Hidden apps are already filtered out, so visible ones fill the first slots.
     for (let i = 0; i < totalSlots; i++) {
-      const app = this.apps.find(app => app.position === i);
-      const item = this.createAppItem(app, i);
+      const item = this.createAppItem(this.apps[i], i);
       grid.appendChild(item);
     }
   }
@@ -86,6 +89,15 @@ class WebAppLauncher {
     const item = document.createElement('div');
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
+
+    if (!app) {
+      const plus = document.createElement('div');
+      plus.className = 'app-title';
+      plus.textContent = '+';
+      item.append(plus);
+      item.title = this.t('settingsTitle');
+      item.addEventListener('click', () => this.openSettings());
+    }
 
     if (app) {
       const title = document.createElement('div');
@@ -114,7 +126,10 @@ class WebAppLauncher {
   }
 
   getGridSize() {
-    return this.settings.ui?.grid_size || 3;
+    return {
+      columns: this.settings.ui?.grid_columns || 3,
+      rows: this.settings.ui?.grid_rows || 4
+    };
   }
 
   async openApp(app, background = false) {
@@ -142,10 +157,14 @@ class WebAppLauncher {
   }
 
   setupEventListeners() {
+    const settingsBtn = document.getElementById('settingsBtn');
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
 
+    if (settingsBtn) {
+      settingsBtn.addEventListener('click', () => this.openSettings());
+    }
     if (reloadBtn) {
       reloadBtn.addEventListener('click', () => this.reloadConfigurations());
     }
@@ -163,23 +182,20 @@ class WebAppLauncher {
     }
   }
 
+  openSettings() {
+    chrome.runtime.openOptionsPage();
+    window.close();
+  }
+
   async reloadConfigurations() {
     this.updateStatusLine(1, this.t('reloading'), 'warning');
     try {
       this.configCache.clear();
       await this.loadConfigurations();
       this.renderGrid();
-      this.applyTheme();
       this.updateStatusLine(1, this.t('reloaded'), 'success');
     } catch (error) {
       this.updateStatusLine(1, this.t('loadError'), 'error');
-    }
-  }
-
-  applyTheme() {
-    const theme = this.settings.themes?.[this.settings.ui?.theme || 'gradient'];
-    if (theme?.background) {
-      document.body.style.background = theme.background;
     }
   }
 
@@ -193,7 +209,8 @@ class WebAppLauncher {
     const statusText = this.t(online ? 'online' : 'offline');
     const statusType = online ? 'success' : 'warning';
     const configuredApps = this.apps.length;
-    const totalSlots = this.getGridSize() ** 2;
+    const { columns, rows } = this.getGridSize();
+    const totalSlots = columns * rows;
     this.updateStatusLine(2, this.t('appsStatus', statusText, configuredApps, totalSlots), statusType);
   }
 
