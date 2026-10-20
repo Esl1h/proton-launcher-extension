@@ -12,26 +12,26 @@
       <header class="page-header">
         <img src="../assets/proton-logo-on-light.svg" alt="Proton" class="logo logo-on-light" />
         <img src="../assets/proton-logo.svg" alt="Proton" class="logo logo-on-dark" />
-        <h1 data-i18n="optionsTitle"></h1>
+        <h1 data-i18n="optionsTitle">Proton Launcher settings</h1>
       </header>
 
       <section class="card">
-        <h2 data-i18n="appsSection"></h2>
-        <p class="hint" data-i18n="appsHint"></p>
+        <h2 data-i18n="appsSection">Apps</h2>
+        <p class="hint" data-i18n="appsHint">Drag to reorder. Uncheck an app to hide it from the launcher.</p>
         <ul class="app-list" id="appList"></ul>
-        <button type="button" class="button" id="resetBtn" data-i18n="resetDefaults"></button>
+        <button type="button" class="button" id="resetBtn" data-i18n="resetDefaults">Restore defaults</button>
       </section>
 
       <section class="card">
-        <h2 data-i18n="themeSection"></h2>
+        <h2 data-i18n="themeSection">Theme</h2>
         <div class="theme-options" id="themeOptions">
-          <label><input type="radio" name="theme" value="auto" /> <span data-i18n="themeAuto"></span></label>
-          <label><input type="radio" name="theme" value="light" /> <span data-i18n="themeLight"></span></label>
-          <label><input type="radio" name="theme" value="dark" /> <span data-i18n="themeDark"></span></label>
+          <label><input type="radio" name="theme" value="auto" /> <span data-i18n="themeAuto">Automatic (system)</span></label>
+          <label><input type="radio" name="theme" value="light" /> <span data-i18n="themeLight">Light</span></label>
+          <label><input type="radio" name="theme" value="dark" /> <span data-i18n="themeDark">Dark</span></label>
         </div>
       </section>
 
-      <p class="saved-note" id="savedNote" role="status"></p>
+      <output class="saved-note" id="savedNote"></output>
     </main>
 
     <script src="../common/prefs.js"></script>

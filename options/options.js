@@ -4,7 +4,6 @@ class LauncherOptions {
     this.prefs = { ...LauncherPrefs.DEFAULTS };
     this.list = document.getElementById('appList');
     this.savedTimer = null;
-    void this.init();
   }
 
   async init() {
@@ -144,5 +143,5 @@ class LauncherOptions {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  new LauncherOptions();
+  void new LauncherOptions().init();
 });

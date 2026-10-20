@@ -146,6 +146,7 @@ input[type="radio"] {
 }
 
 .saved-note {
+  display: block;
   min-height: 20px;
   text-align: center;
   color: var(--signal-success);
