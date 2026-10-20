@@ -34,7 +34,7 @@ toc::[]
 == Features
 
 * *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
-* *Real-time Status* - Online/offline indicator with automatic updates
+* *Network Status* - Online/offline indicator for the local connection
 * *Keyboard Shortcut* - Open the launcher instantly with `Ctrl+Shift+L`
 * *Theme Support* - Modern gradient theme with customization options
 * *Performance Metrics* - Displays load time in milliseconds
@@ -112,10 +112,13 @@ Edit the files in `config/` to customize apps and preferences.
 [source,json]
 ----
 {
-  "theme": "gradient",
-  "grid_size": 3,
-  "close_popup_on_launch": true,
-  "update_interval": 30000
+  "ui": {
+    "theme": "gradient",
+    "grid_size": 3
+  },
+  "behavior": {
+    "close_popup_on_launch": true
+  }
 }
 ----
 
@@ -134,10 +137,6 @@ Edit the files in `config/` to customize apps and preferences.
 |`close_popup_on_launch`
 |`true`
 |Auto-close popup after opening an app
-
-|`update_interval`
-|`30000`
-|Status update frequency in milliseconds
 |===
 
 === Adding Custom Apps

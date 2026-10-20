@@ -17,8 +17,8 @@ class WebAppLauncher {
       this.updateStatus();
       const loadTime = performance.now() - startTime;
       this.updateStatusLine(1, `loaded on ${loadTime.toFixed(1)}ms`, 'success');
-      const interval = this.settings.status?.update_interval || 30000;
-      setInterval(() => this.updateStatus(), interval);
+      window.addEventListener('online', () => this.updateStatus());
+      window.addEventListener('offline', () => this.updateStatus());
     } catch (error) {
       this.updateStatusLine(1, 'Error on load', 'error');
       this.updateStatusLine(2, '', 'error');
@@ -158,18 +158,14 @@ class WebAppLauncher {
     return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzY2N2VlYSIvPgo8cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K';
   }
 
-  async updateStatus() {
-    try {
-      const online = navigator.onLine;
-      const statusText = online ? 'Online' : 'Offline';
-      const statusType = online ? 'success' : 'warning';
-      this.updateStatusLine(1, `Status: ${statusText}`, statusType);
-      const configuredApps = this.apps.length;
-      const totalSlots = this.getGridSize() ** 2;
-      this.updateStatusLine(2, `${configuredApps}/${totalSlots} apps sets`);
-    } catch (error) {
-      this.updateStatusLine(2, '', 'error');
-    }
+  updateStatus() {
+    // navigator.onLine only reflects local network state, not Proton service health.
+    const online = navigator.onLine;
+    const statusText = online ? 'Online' : 'Offline';
+    const statusType = online ? 'success' : 'warning';
+    const configuredApps = this.apps.length;
+    const totalSlots = this.getGridSize() ** 2;
+    this.updateStatusLine(2, `${statusText} · ${configuredApps}/${totalSlots} apps sets`, statusType);
   }
 
   updateStatusLine(lineNumber, text, type = 'success') {
