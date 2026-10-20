@@ -51,7 +51,7 @@ class WebAppLauncher {
     const grid = document.getElementById('appGrid');
     if (!grid) return;
 
-    grid.innerHTML = '';
+    grid.replaceChildren();
     const gridSize = this.settings.ui?.grid_size || 3;
     const totalSlots = gridSize * gridSize;
 
@@ -67,18 +67,24 @@ class WebAppLauncher {
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
 
+    const title = document.createElement('div');
+    title.className = 'app-title';
+
     if (app) {
-      item.innerHTML = `
-        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}">
-        <div class="app-title">${this.sanitizeHtml(app.title)}</div>
-      `;
+      const icon = document.createElement('img');
+      icon.className = 'app-icon';
+      icon.alt = app.title;
       // Inline onerror handlers are blocked by the extension CSP.
-      item.querySelector('.app-icon').addEventListener('error', (e) => {
-        e.target.src = this.getDefaultIcon();
+      icon.addEventListener('error', () => {
+        icon.src = this.getDefaultIcon();
       }, { once: true });
+      icon.src = app.icon;
+      title.textContent = app.title;
+      item.append(icon, title);
       item.addEventListener('click', () => this.openApp(app));
     } else {
-      item.innerHTML = '<div class="app-title">+</div>';
+      title.textContent = '+';
+      item.append(title);
       item.addEventListener('click', () => this.openSettings(position));
     }
 
@@ -176,21 +182,14 @@ class WebAppLauncher {
   updateStatusLine(lineNumber, text, type = 'success') {
     const statusLine = document.getElementById(`statusLine${lineNumber}`);
     if (statusLine) {
-      statusLine.innerHTML = `
-        <span class="status-indicator ${type}"></span>
-        ${text}
-      `;
+      const indicator = document.createElement('span');
+      indicator.className = `status-indicator ${type}`;
+      statusLine.replaceChildren(indicator, text);
     }
   }
 
   openSettings() {
     alert('On development!');
-  }
-
-  sanitizeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
   }
 
   validateUrl(url) {

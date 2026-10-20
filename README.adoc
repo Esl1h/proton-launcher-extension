@@ -185,7 +185,7 @@ This extension operates with *zero explicit permissions*. It only uses:
 
 * *URL Whitelist* - Only allows URLs from approved domains (Proton, SimpleLogin, StandardNotes)
 * *HTTPS Only* - All URLs must use HTTPS protocol
-* *XSS Protection* - HTML sanitization for all user-facing content
+* *XSS Protection* - UI is built with DOM APIs and `textContent`, never `innerHTML`
 * *Content Security Policy* - Strict CSP preventing inline scripts
 
 == Project Structure
