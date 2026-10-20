@@ -1,0 +1,43 @@
+name: Bug report
+description: Something in the extension does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This extension is not affiliated with Proton AG. Problems with Proton services themselves should go to https://proton.me/support.
+  - type: input
+    id: version
+    attributes:
+      label: Extension version
+      description: Shown in chrome://extensions
+      placeholder: "1.5.0"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: "Chrome 130, Brave 1.71, Edge 130..."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the launcher
+        2. Click ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or console errors
+      description: Right-click the popup, choose Inspect, and copy any errors from the Console tab.

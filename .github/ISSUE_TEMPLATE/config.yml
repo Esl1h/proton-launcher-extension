@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Proton service problems
+    url: https://proton.me/support
+    about: Issues with Proton Mail, Drive, Pass and other services are handled by Proton, not this project.
