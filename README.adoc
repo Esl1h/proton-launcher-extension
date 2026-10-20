@@ -252,5 +252,6 @@ Proton and the Proton logo are trademarks of Proton AG. This license covers the 
 
 == Version History
 
+* *1.5.0* - Bundled app icons (no network requests when opening the popup), stricter CSP, English and Brazilian Portuguese UI, proper extension icons, safer DOM rendering and URL checks, configurable grid size, native shortcut handling
 * *1.4.1* - URL fixes
 * *1.4.0* - Initial public release
