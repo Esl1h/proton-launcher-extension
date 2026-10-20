@@ -37,7 +37,6 @@ toc::[]
 * *Real-time Status* - Online/offline indicator with automatic updates
 * *Keyboard Shortcut* - Open the launcher instantly with `Ctrl+Shift+L`
 * *Theme Support* - Modern gradient theme with customization options
-* *Cloud Sync* - User preferences sync across devices via Chrome Storage
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
 * *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
@@ -179,7 +178,6 @@ Add new themes in `config/settings.json`:
 
 This extension operates with *zero explicit permissions*. It only uses:
 
-* `chrome.storage.sync` - For saving user preferences
 * `chrome.tabs` - For opening new tabs
 * `chrome.commands` - For keyboard shortcuts
 
@@ -215,7 +213,6 @@ proton-launcher-extension/
 
 * *JavaScript* - Pure vanilla JS (ES6+)
 * *Chrome Extensions* - Manifest V3
-* *Chrome Storage API* - For user preferences sync
 * *CSS3* - Modern styling with CSS custom properties
 
 == Links

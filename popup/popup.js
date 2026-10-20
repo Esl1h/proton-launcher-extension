@@ -45,33 +45,6 @@ class WebAppLauncher {
 
     this.apps = appsConfig.apps || [];
     this.settings = settingsConfig || {};
-
-    const userApps = await this.loadUserConfig();
-    if (userApps && userApps.length > 0) {
-      this.mergeUserApps(userApps);
-    }
-  }
-
-  async loadUserConfig() {
-    try {
-      const result = await chrome.storage.sync.get(['userApps', 'lastUpdated']);
-      return result.userApps || null;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  mergeUserApps(userApps) {
-    userApps.forEach(userApp => {
-      const existingIndex = this.apps.findIndex(
-        app => app.position === userApp.position
-      );
-      if (existingIndex >= 0) {
-        this.apps[existingIndex] = { ...this.apps[existingIndex], ...userApp };
-      } else {
-        this.apps.push(userApp);
-      }
-    });
   }
 
   renderGrid() {
