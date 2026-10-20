@@ -20,7 +20,7 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+L"
+        "default": "Alt+Shift+P"
       },
       "description": "__MSG_commandOpen__"
     }
