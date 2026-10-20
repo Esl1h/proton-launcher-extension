@@ -1,0 +1,34 @@
+{
+  "extName": { "message": "Proton Launcher (não oficial)" },
+  "extDescription": { "message": "Lançador rápido em grade para os webapps da Proton (não oficial)" },
+  "actionTitle": { "message": "Proton Launcher" },
+  "commandOpen": { "message": "Abrir o lançador" },
+  "loadingConfigs": { "message": "Carregando configurações..." },
+  "ready": { "message": "Pronto" },
+  "loadedIn": {
+    "message": "Carregado em $TIME$ ms",
+    "placeholders": { "time": { "content": "$1" } }
+  },
+  "loadError": { "message": "Erro ao carregar as configurações" },
+  "online": { "message": "Online" },
+  "offline": { "message": "Offline" },
+  "appsStatus": {
+    "message": "$STATE$ · $COUNT$/$TOTAL$ apps",
+    "placeholders": {
+      "state": { "content": "$1" },
+      "count": { "content": "$2" },
+      "total": { "content": "$3" }
+    }
+  },
+  "opening": {
+    "message": "Abrindo $APP$...",
+    "placeholders": { "app": { "content": "$1" } }
+  },
+  "invalidUrl": { "message": "URL inválida" },
+  "reloading": { "message": "Recarregando..." },
+  "reloaded": { "message": "Configurações recarregadas" },
+  "reloadTitle": { "message": "Recarregar configurações" },
+  "servicesStatus": { "message": "Status dos serviços" },
+  "statusUnavailable": { "message": "indisponível" },
+  "downloadApps": { "message": "Baixar apps e extensões oficiais" }
+}

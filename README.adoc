@@ -3,7 +3,9 @@
 :toc-title: Table of Contents
 :toclevels: 2
 
-A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with real-time connection status and keyboard shortcuts.
+A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with connection status and keyboard shortcuts.
+
+https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Install from the Chrome Web Store]
 
 ++++
 <div align="center">
@@ -34,12 +36,13 @@ toc::[]
 == Features
 
 * *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
-* *Real-time Status* - Online/offline indicator with automatic updates
+* *Network Status* - Online/offline indicator for the local connection
+* *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
 * *Keyboard Shortcut* - Open the launcher instantly with `Ctrl+Shift+L`
 * *Theme Support* - Modern gradient theme with customization options
-* *Cloud Sync* - User preferences sync across devices via Chrome Storage
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
+* *Localized* - English and Brazilian Portuguese, following the browser language
 * *Zero Dependencies* - Pure vanilla JavaScript, no external libraries
 * *Minimal Permissions* - Privacy-focused with no special permissions required
 
@@ -90,6 +93,10 @@ The extension comes with 9 pre-configured apps from the Proton ecosystem:
 
 == Installation
 
+Install it from the https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Chrome Web Store] (works in Chrome, Brave, Edge and other Chromium browsers).
+
+=== From source
+
 . Download or clone this repository
 . In Chrome/Brave, go to `chrome://extensions/` and enable *Developer mode*
 . Click "*Load unpacked*" and select the project folder
@@ -113,10 +120,13 @@ Edit the files in `config/` to customize apps and preferences.
 [source,json]
 ----
 {
-  "theme": "gradient",
-  "grid_size": 3,
-  "close_popup_on_launch": true,
-  "update_interval": 30000
+  "ui": {
+    "theme": "gradient",
+    "grid_size": 3
+  },
+  "behavior": {
+    "close_popup_on_launch": true
+  }
 }
 ----
 
@@ -135,10 +145,6 @@ Edit the files in `config/` to customize apps and preferences.
 |`close_popup_on_launch`
 |`true`
 |Auto-close popup after opening an app
-
-|`update_interval`
-|`30000`
-|Status update frequency in milliseconds
 |===
 
 === Adding Custom Apps
@@ -150,11 +156,13 @@ Edit `config/apps.json` to add or modify apps:
 {
   "title": "My App",
   "url": "https://example.com",
-  "icon": "https://example.com/favicon.ico",
+  "icon": "/assets/apps/my-app.png",
   "position": 0,
   "description": "My custom app"
 }
 ----
+
+Icons must be bundled under `assets/apps/`: the Content Security Policy blocks remote images.
 
 === Creating Custom Themes
 
@@ -165,8 +173,6 @@ Add new themes in `config/settings.json`:
 {
   "themes": {
     "my-theme": {
-      "primary": "#1a1a2e",
-      "secondary": "#16213e",
       "background": "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
     }
   }
@@ -179,7 +185,6 @@ Add new themes in `config/settings.json`:
 
 This extension operates with *zero explicit permissions*. It only uses:
 
-* `chrome.storage.sync` - For saving user preferences
 * `chrome.tabs` - For opening new tabs
 * `chrome.commands` - For keyboard shortcuts
 
@@ -187,16 +192,19 @@ This extension operates with *zero explicit permissions*. It only uses:
 
 * *URL Whitelist* - Only allows URLs from approved domains (Proton, SimpleLogin, StandardNotes)
 * *HTTPS Only* - All URLs must use HTTPS protocol
-* *XSS Protection* - HTML sanitization for all user-facing content
-* *Content Security Policy* - Strict CSP preventing inline scripts
+* *XSS Protection* - UI is built with DOM APIs and `textContent`, never `innerHTML`
+* *Content Security Policy* - Strict CSP preventing inline scripts and remote images; network requests are limited to `status.proton.me`
+
+=== Privacy
+
+The extension collects no data. App icons are bundled in the package. The only request it makes on its own is one anonymous call to the public `https://status.proton.me/api/v2/status.json` endpoint each time the popup opens, without cookies, to color the service status badge. Any other traffic only happens when you click an app or link, which opens that site in a new tab.
 
 == Project Structure
 
 ----
 proton-launcher-extension/
 ├── manifest.json            # Extension manifest (Manifest V3)
-├── background/
-│   └── background.js        # Service worker for events
+├── _locales/                # UI strings (en, pt_BR)
 ├── config/
 │   ├── apps.json            # Default apps configuration
 │   └── settings.json        # UI and behavior settings
@@ -205,6 +213,7 @@ proton-launcher-extension/
 │   ├── popup.css            # Styles
 │   └── popup.js             # Main application logic
 ├── assets/
+│   ├── apps/                # Bundled app icons
 │   ├── icons/               # Extension icons (16/48/128px)
 │   └── proton-logo.svg      # Proton branding
 ├── docs/                    # Screenshots and documentation
@@ -215,7 +224,6 @@ proton-launcher-extension/
 
 * *JavaScript* - Pure vanilla JS (ES6+)
 * *Chrome Extensions* - Manifest V3
-* *Chrome Storage API* - For user preferences sync
 * *CSS3* - Modern styling with CSS custom properties
 
 == Links
@@ -239,9 +247,12 @@ Contributions are welcome! Feel free to:
 
 == License
 
-This project is open source. See the repository for license details.
+Released under the MIT License. See link:LICENSE[LICENSE].
+
+Proton and the Proton logo are trademarks of Proton AG. This license covers the extension code only.
 
 == Version History
 
+* *1.5.0* - Service status badge from status.proton.me, bundled app icons, stricter CSP, English and Brazilian Portuguese UI, proper extension icons, safer DOM rendering and URL checks, configurable grid size, native shortcut handling
 * *1.4.1* - URL fixes
 * *1.4.0* - Initial public release

@@ -33,9 +33,13 @@ Thumbs.db
 .env.*
 
 # Certs
-.crt
-.csr
-.pfx
-.p12
-.key
+*.crt
+*.csr
+*.pfx
+*.p12
+*.key
 *.pem
+
+# Packaged builds (published as release assets)
+*.crx
+*.zip

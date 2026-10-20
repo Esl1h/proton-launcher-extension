@@ -3,26 +3,45 @@ class WebAppLauncher {
     this.apps = [];
     this.settings = {};
     this.configCache = new Map();
-    this.init();
+    void this.init();
   }
 
   async init() {
     const startTime = performance.now();
+    this.localizePage();
     try {
-      this.updateStatusLine(1, 'loading configs...', 'warning');
+      this.updateStatusLine(1, this.t('loadingConfigs'), 'warning');
       await this.loadConfigurations();
       this.renderGrid();
       this.setupEventListeners();
       this.applyTheme();
       this.updateStatus();
       const loadTime = performance.now() - startTime;
-      this.updateStatusLine(1, `loaded on ${loadTime.toFixed(1)}ms`, 'success');
-      const interval = this.settings.status?.update_interval || 30000;
-      setInterval(() => this.updateStatus(), interval);
+      this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
+      window.addEventListener('online', () => this.updateStatus());
+      window.addEventListener('offline', () => this.updateStatus());
+      // Not awaited: the badge fills in later and failures are handled inside.
+      void this.checkServiceStatus();
     } catch (error) {
-      this.updateStatusLine(1, 'Error on load', 'error');
+      this.updateStatusLine(1, this.t('loadError'), 'error');
       this.updateStatusLine(2, '', 'error');
     }
+  }
+
+  t(key, ...substitutions) {
+    return chrome.i18n.getMessage(key, substitutions.map(String)) || key;
+  }
+
+  localizePage() {
+    document.documentElement.lang = chrome.i18n.getUILanguage();
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = this.t(el.dataset.i18n);
+    });
+    // Icon-only buttons need the label for screen readers too.
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      el.title = this.t(el.dataset.i18nTitle);
+      el.setAttribute('aria-label', el.title);
+    });
   }
 
   async loadConfig(configFile) {
@@ -45,42 +64,16 @@ class WebAppLauncher {
 
     this.apps = appsConfig.apps || [];
     this.settings = settingsConfig || {};
-
-    const userApps = await this.loadUserConfig();
-    if (userApps && userApps.length > 0) {
-      this.mergeUserApps(userApps);
-    }
-  }
-
-  async loadUserConfig() {
-    try {
-      const result = await chrome.storage.sync.get(['userApps', 'lastUpdated']);
-      return result.userApps || null;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  mergeUserApps(userApps) {
-    userApps.forEach(userApp => {
-      const existingIndex = this.apps.findIndex(
-        app => app.position === userApp.position
-      );
-      if (existingIndex >= 0) {
-        this.apps[existingIndex] = { ...this.apps[existingIndex], ...userApp };
-      } else {
-        this.apps.push(userApp);
-      }
-    });
   }
 
   renderGrid() {
     const grid = document.getElementById('appGrid');
     if (!grid) return;
 
-    grid.innerHTML = '';
-    const gridSize = this.settings.ui?.grid_size || 3;
+    grid.replaceChildren();
+    const gridSize = this.getGridSize();
     const totalSlots = gridSize * gridSize;
+    grid.style.setProperty('--grid-size', gridSize);
 
     for (let i = 0; i < totalSlots; i++) {
       const app = this.apps.find(app => app.position === i);
@@ -95,23 +88,31 @@ class WebAppLauncher {
     item.dataset.position = position;
 
     if (app) {
-      item.innerHTML = `
-        <img class="app-icon" src="${this.sanitizeHtml(app.icon)}" alt="${this.sanitizeHtml(app.title)}"
-             onerror="this.src='${this.getDefaultIcon()}'">
-        <div class="app-title">${this.sanitizeHtml(app.title)}</div>
-      `;
+      const title = document.createElement('div');
+      title.className = 'app-title';
+      const icon = document.createElement('img');
+      icon.className = 'app-icon';
+      icon.alt = app.title;
+      // Inline onerror handlers are blocked by the extension CSP.
+      icon.addEventListener('error', () => {
+        icon.src = this.getDefaultIcon();
+      }, { once: true });
+      icon.src = app.icon;
+      title.textContent = app.title;
+      item.append(icon, title);
       item.addEventListener('click', () => this.openApp(app));
-    } else {
-      item.innerHTML = '<div class="app-title">+</div>';
-      item.addEventListener('click', () => this.openSettings(position));
     }
 
     return item;
   }
 
+  getGridSize() {
+    return this.settings.ui?.grid_size || 3;
+  }
+
   async openApp(app) {
     if (!this.validateUrl(app.url)) {
-      this.updateStatusLine(1, 'invalid URL', 'error');
+      this.updateStatusLine(1, this.t('invalidUrl'), 'error');
       return;
     }
     try {
@@ -119,7 +120,7 @@ class WebAppLauncher {
         url: app.url,
         active: true
       });
-      this.updateStatusLine(1, `Abrindo ${app.title}...`);
+      this.updateStatusLine(1, this.t('opening', app.title));
       if (this.settings.behavior?.close_popup_on_launch !== false) {
         window.close();
       }
@@ -129,27 +130,21 @@ class WebAppLauncher {
   }
 
   setupEventListeners() {
-    const settingsBtn = document.getElementById('settingsBtn');
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
 
-    if (settingsBtn) {
-      settingsBtn.addEventListener('click', () => this.openSettings());
-    }
     if (reloadBtn) {
       reloadBtn.addEventListener('click', () => this.reloadConfigurations());
     }
     if (statusLink) {
-      statusLink.addEventListener('click', (e) => {
-        e.preventDefault();
+      statusLink.addEventListener('click', () => {
         chrome.tabs.create({ url: 'https://status.proton.me/' });
         window.close();
       });
     }
     if (appsLink) {
-      appsLink.addEventListener('click', (e) => {
-        e.preventDefault();
+      appsLink.addEventListener('click', () => {
         chrome.tabs.create({ url: 'https://protonapps.com/' });
         window.close();
       });
@@ -157,26 +152,22 @@ class WebAppLauncher {
   }
 
   async reloadConfigurations() {
-    this.updateStatusLine(1, 'loading...', 'warning');
+    this.updateStatusLine(1, this.t('reloading'), 'warning');
     try {
       this.configCache.clear();
       await this.loadConfigurations();
       this.renderGrid();
       this.applyTheme();
-      this.updateStatusLine(1, 'configs loaded!', 'success');
+      this.updateStatusLine(1, this.t('reloaded'), 'success');
     } catch (error) {
-      this.updateStatusLine(1, 'error on loading', 'error');
+      this.updateStatusLine(1, this.t('loadError'), 'error');
     }
   }
 
   applyTheme() {
     const theme = this.settings.themes?.[this.settings.ui?.theme || 'gradient'];
-    if (theme) {
-      document.documentElement.style.setProperty('--primary-color', theme.primary);
-      document.documentElement.style.setProperty('--secondary-color', theme.secondary);
-      if (theme.background) {
-        document.body.style.background = theme.background;
-      }
+    if (theme?.background) {
+      document.body.style.background = theme.background;
     }
   }
 
@@ -184,45 +175,55 @@ class WebAppLauncher {
     return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzY2N2VlYSIvPgo8cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K';
   }
 
-  async updateStatus() {
+  updateStatus() {
+    // navigator.onLine only reflects local network state, not Proton service health.
+    const online = navigator.onLine;
+    const statusText = this.t(online ? 'online' : 'offline');
+    const statusType = online ? 'success' : 'warning';
+    const configuredApps = this.apps.length;
+    const totalSlots = this.getGridSize() ** 2;
+    this.updateStatusLine(2, this.t('appsStatus', statusText, configuredApps, totalSlots), statusType);
+  }
+
+  async checkServiceStatus() {
+    const badge = document.getElementById('serviceBadge');
+    const button = document.getElementById('statusLink');
+    if (!badge || !button) return;
+
+    let indicator = 'unknown';
+    let description = this.t('statusUnavailable');
     try {
-      const online = navigator.onLine;
-      const statusText = online ? 'Online' : 'Offline';
-      const statusType = online ? 'success' : 'warning';
-      this.updateStatusLine(1, `Status: ${statusText}`, statusType);
-      const configuredApps = this.apps.length;
-      this.updateStatusLine(2, `${configuredApps}/9 apps sets`);
-    } catch (error) {
-      this.updateStatusLine(2, '', 'error');
+      // Public Atlassian Statuspage API behind status.proton.me.
+      const response = await fetch('https://status.proton.me/api/v2/status.json');
+      const { status } = await response.json();
+      if (['none', 'minor', 'major', 'critical', 'maintenance'].includes(status.indicator)) {
+        indicator = status.indicator;
+        description = status.description;
+      }
+    } catch {
+      // Keep the neutral badge when offline or the API is unreachable.
     }
+    badge.className = `status-badge ${indicator}`;
+    button.title = `${this.t('servicesStatus')}: ${description}`;
+    button.setAttribute('aria-label', button.title);
   }
 
   updateStatusLine(lineNumber, text, type = 'success') {
     const statusLine = document.getElementById(`statusLine${lineNumber}`);
     if (statusLine) {
-      statusLine.innerHTML = `
-        <span class="status-indicator ${type}"></span>
-        ${text}
-      `;
+      const indicator = document.createElement('span');
+      indicator.className = `status-indicator ${type}`;
+      statusLine.replaceChildren(indicator, text);
     }
-  }
-
-  openSettings() {
-    alert('On development!');
-  }
-
-  sanitizeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
   }
 
   validateUrl(url) {
     try {
       const urlObj = new URL(url);
-      const allowedDomains = ['proton', 'simplelogin', 'standardnotes'];
+      const allowedDomains = ['proton.me', 'protonvpn.com', 'simplelogin.io', 'standardnotes.com'];
+      const host = urlObj.hostname;
       return urlObj.protocol === 'https:' &&
-            allowedDomains.some(domain => urlObj.hostname.includes(domain));
+            allowedDomains.some(domain => host === domain || host.endsWith(`.${domain}`));
     } catch {
       return false;
     }

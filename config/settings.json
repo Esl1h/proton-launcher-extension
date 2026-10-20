@@ -6,13 +6,8 @@
   "behavior": {
     "close_popup_on_launch": true
   },
-  "status": {
-    "update_interval": 30000
-  },
   "themes": {
     "gradient": {
-      "primary": "#667eea",
-      "secondary": "#764ba2",
       "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
     }
   }

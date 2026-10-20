@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebApp Launcher</title>
+    <title>Proton Launcher</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
@@ -18,26 +18,29 @@
       </div>
       
       <div class="status-section">
-        <div class="status-line" id="statusLine1">
-          Carregando configurações...
+        <div class="status-lines">
+          <div class="status-line" id="statusLine1" data-i18n="loadingConfigs"></div>
+          <div class="status-line" id="statusLine2" data-i18n="ready"></div>
         </div>
-        <div class="status-line" id="statusLine2">
-          Pronto para uso
-        </div>
-      </div>
-      
-      <div class="status-section">
-        <div class="status-line">
-          <a href="#" id="statusLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">📊 Services Status</a>
-        </div>
-        <div class="status-line">
-          <a href="#" id="appsLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">🚀 Download officials Apps and extensions</a>
+        <div class="footer-actions">
+          <button type="button" class="icon-button" id="statusLink" data-i18n-title="servicesStatus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            <span class="status-badge unknown" id="serviceBadge"></span>
+          </button>
+          <button type="button" class="icon-button" id="appsLink" data-i18n-title="downloadApps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
         </div>
       </div>
       
       <div class="settings-button">
-        <button id="settingsBtn" title="Configurações">⚙️</button>
-        <button id="reloadBtn" title="Recarregar Configs">🔄</button>
+        <button id="reloadBtn" data-i18n-title="reloadTitle">🔄</button>
       </div>
     </div>
     

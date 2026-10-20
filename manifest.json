@@ -1,30 +1,28 @@
 {
   "manifest_version": 3,
-  "name": "Proton Launcher (unofficial)",
+  "name": "__MSG_extName__",
   "short_name": "ProtonLauncher",
-  "version": "1.4.1",
-  "description": "Fast launcher on grid to Proton webapps (unofficial)",
+  "version": "1.5.0",
+  "default_locale": "en",
+  "description": "__MSG_extDescription__",
   "author": "Esli Silva",
   "homepage_url": "https://github.com/Esl1h/proton-launcher-extension",
   "permissions": [],
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "Proton Launcher",
+    "default_title": "__MSG_actionTitle__",
     "default_icon": {
       "16": "assets/icons/icon16.png",
       "48": "assets/icons/icon48.png",
       "128": "assets/icons/icon128.png"
     }
   },
-  "background": {
-    "service_worker": "background/background.js"
-  },
   "commands": {
-    "open-launcher": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Ctrl+Shift+L"
       },
-      "description": "Abrir WebApp Launcher"
+      "description": "__MSG_commandOpen__"
     }
   },
   "icons": {
@@ -34,6 +32,6 @@
   },
   "minimum_chrome_version": "100",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' https: data:; connect-src 'self' https:;"
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data:; connect-src 'self' https://status.proton.me;"
   }
 }
