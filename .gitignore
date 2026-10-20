@@ -33,9 +33,9 @@ Thumbs.db
 .env.*
 
 # Certs
-.crt
-.csr
-.pfx
-.p12
-.key
+*.crt
+*.csr
+*.pfx
+*.p12
+*.key
 *.pem
