@@ -5,14 +5,14 @@
       "url": "https://mail.proton.me",
       "icon": "/assets/apps/mail.png",
       "position": 0,
-      "description": "Email criptografado e privado"
+      "description": "Encrypted and private email"
     },
     {
       "title": "Calendar",
       "url": "https://calendar.proton.me",
       "icon": "/assets/apps/calendar.png",
       "position": 1,
-      "description": "Calendário privado e criptografado"
+      "description": "Private and encrypted calendar"
 
     },
     {
@@ -20,21 +20,21 @@
       "url": "https://pass.proton.me",
       "icon": "/assets/apps/pass.png",
       "position": 2,
-      "description": "Gerenciador de senhas seguro"
+      "description": "Secure password manager"
     },
     {
       "title": "Wallet",
       "url": "https://wallet.proton.me",
       "icon": "/assets/apps/wallet.png",
       "position": 3,
-      "description": "Carteira Bitcoin auto-custodial"
+      "description": "Self-custodial Bitcoin wallet"
     },
     {
       "title": "Drive",
       "url": "https://drive.proton.me",
       "icon": "/assets/apps/drive.png",
       "position": 4,
-      "description": "Armazenamento em nuvem criptografado"
+      "description": "Encrypted cloud storage"
     },
     {
       "title": "VPN",
@@ -48,21 +48,21 @@
       "url": "https://app.simplelogin.io/auth/login?next=%2Fdashboard%2F%3F",
       "icon": "/assets/apps/simplelogin.png",
       "position": 6,
-      "description": "Aliases de email para proteção"
+      "description": "Email aliases for protection"
     },
     {
       "title": "Notes",
       "url": "https://app.standardnotes.com",
       "icon": "/assets/apps/notes.png",
       "position": 7,
-      "description": "Notas criptografadas e privadas"
+      "description": "Encrypted and private notes"
     },
     {
       "title": "AI",
       "url": "https://lumo.proton.me/",
       "icon": "/assets/apps/ai.png",
       "position": 8,
-      "description": "Assistente de IA para produtividade"
+      "description": "Private AI assistant"
     }
   ]
 }

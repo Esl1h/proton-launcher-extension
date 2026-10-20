@@ -1,0 +1,33 @@
+{
+  "extName": { "message": "Proton Launcher (unofficial)" },
+  "extDescription": { "message": "Fast launcher on grid to Proton webapps (unofficial)" },
+  "actionTitle": { "message": "Proton Launcher" },
+  "commandOpen": { "message": "Open the launcher" },
+  "loadingConfigs": { "message": "Loading settings..." },
+  "ready": { "message": "Ready" },
+  "loadedIn": {
+    "message": "Loaded in $TIME$ ms",
+    "placeholders": { "time": { "content": "$1" } }
+  },
+  "loadError": { "message": "Error loading settings" },
+  "online": { "message": "Online" },
+  "offline": { "message": "Offline" },
+  "appsStatus": {
+    "message": "$STATE$ · $COUNT$/$TOTAL$ apps",
+    "placeholders": {
+      "state": { "content": "$1" },
+      "count": { "content": "$2" },
+      "total": { "content": "$3" }
+    }
+  },
+  "opening": {
+    "message": "Opening $APP$...",
+    "placeholders": { "app": { "content": "$1" } }
+  },
+  "invalidUrl": { "message": "Invalid URL" },
+  "reloading": { "message": "Reloading..." },
+  "reloaded": { "message": "Settings reloaded" },
+  "reloadTitle": { "message": "Reload settings" },
+  "servicesStatus": { "message": "📊 Services status" },
+  "downloadApps": { "message": "🚀 Download official apps and extensions" }
+}

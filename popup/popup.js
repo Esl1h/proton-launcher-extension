@@ -8,21 +8,36 @@ class WebAppLauncher {
 
   async init() {
     const startTime = performance.now();
+    this.localizePage();
     try {
-      this.updateStatusLine(1, 'loading configs...', 'warning');
+      this.updateStatusLine(1, this.t('loadingConfigs'), 'warning');
       await this.loadConfigurations();
       this.renderGrid();
       this.setupEventListeners();
       this.applyTheme();
       this.updateStatus();
       const loadTime = performance.now() - startTime;
-      this.updateStatusLine(1, `loaded on ${loadTime.toFixed(1)}ms`, 'success');
+      this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
       window.addEventListener('online', () => this.updateStatus());
       window.addEventListener('offline', () => this.updateStatus());
     } catch (error) {
-      this.updateStatusLine(1, 'Error on load', 'error');
+      this.updateStatusLine(1, this.t('loadError'), 'error');
       this.updateStatusLine(2, '', 'error');
     }
+  }
+
+  t(key, ...substitutions) {
+    return chrome.i18n.getMessage(key, substitutions.map(String)) || key;
+  }
+
+  localizePage() {
+    document.documentElement.lang = chrome.i18n.getUILanguage();
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = this.t(el.dataset.i18n);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      el.title = this.t(el.dataset.i18nTitle);
+    });
   }
 
   async loadConfig(configFile) {
@@ -93,7 +108,7 @@ class WebAppLauncher {
 
   async openApp(app) {
     if (!this.validateUrl(app.url)) {
-      this.updateStatusLine(1, 'invalid URL', 'error');
+      this.updateStatusLine(1, this.t('invalidUrl'), 'error');
       return;
     }
     try {
@@ -101,7 +116,7 @@ class WebAppLauncher {
         url: app.url,
         active: true
       });
-      this.updateStatusLine(1, `Abrindo ${app.title}...`);
+      this.updateStatusLine(1, this.t('opening', app.title));
       if (this.settings.behavior?.close_popup_on_launch !== false) {
         window.close();
       }
@@ -135,15 +150,15 @@ class WebAppLauncher {
   }
 
   async reloadConfigurations() {
-    this.updateStatusLine(1, 'loading...', 'warning');
+    this.updateStatusLine(1, this.t('reloading'), 'warning');
     try {
       this.configCache.clear();
       await this.loadConfigurations();
       this.renderGrid();
       this.applyTheme();
-      this.updateStatusLine(1, 'configs loaded!', 'success');
+      this.updateStatusLine(1, this.t('reloaded'), 'success');
     } catch (error) {
-      this.updateStatusLine(1, 'error on loading', 'error');
+      this.updateStatusLine(1, this.t('loadError'), 'error');
     }
   }
 
@@ -161,11 +176,11 @@ class WebAppLauncher {
   updateStatus() {
     // navigator.onLine only reflects local network state, not Proton service health.
     const online = navigator.onLine;
-    const statusText = online ? 'Online' : 'Offline';
+    const statusText = this.t(online ? 'online' : 'offline');
     const statusType = online ? 'success' : 'warning';
     const configuredApps = this.apps.length;
     const totalSlots = this.getGridSize() ** 2;
-    this.updateStatusLine(2, `${statusText} · ${configuredApps}/${totalSlots} apps sets`, statusType);
+    this.updateStatusLine(2, this.t('appsStatus', statusText, configuredApps, totalSlots), statusType);
   }
 
   updateStatusLine(lineNumber, text, type = 'success') {

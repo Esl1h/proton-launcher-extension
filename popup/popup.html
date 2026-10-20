@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebApp Launcher</title>
+    <title>Proton Launcher</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
@@ -18,25 +18,21 @@
       </div>
       
       <div class="status-section">
-        <div class="status-line" id="statusLine1">
-          Carregando configurações...
-        </div>
-        <div class="status-line" id="statusLine2">
-          Pronto para uso
-        </div>
+        <div class="status-line" id="statusLine1" data-i18n="loadingConfigs"></div>
+        <div class="status-line" id="statusLine2" data-i18n="ready"></div>
       </div>
       
       <div class="status-section">
         <div class="status-line">
-          <a href="#" id="statusLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">📊 Services Status</a>
+          <a href="#" id="statusLink" data-i18n="servicesStatus" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;"></a>
         </div>
         <div class="status-line">
-          <a href="#" id="appsLink" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;">🚀 Download officials Apps and extensions</a>
+          <a href="#" id="appsLink" data-i18n="downloadApps" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;"></a>
         </div>
       </div>
       
       <div class="settings-button">
-        <button id="reloadBtn" title="Recarregar Configs">🔄</button>
+        <button id="reloadBtn" data-i18n-title="reloadTitle">🔄</button>
       </div>
     </div>
     
