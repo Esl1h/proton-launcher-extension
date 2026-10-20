@@ -28,6 +28,6 @@
   "reloading": { "message": "Recarregando..." },
   "reloaded": { "message": "Configurações recarregadas" },
   "reloadTitle": { "message": "Recarregar configurações" },
-  "servicesStatus": { "message": "📊 Status dos serviços" },
-  "downloadApps": { "message": "🚀 Baixar apps e extensões oficiais" }
+  "servicesStatus": { "message": "Status dos serviços" },
+  "downloadApps": { "message": "Baixar apps e extensões oficiais" }
 }

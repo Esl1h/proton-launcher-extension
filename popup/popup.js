@@ -35,8 +35,10 @@ class WebAppLauncher {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       el.textContent = this.t(el.dataset.i18n);
     });
+    // Icon-only buttons need the label for screen readers too.
     document.querySelectorAll('[data-i18n-title]').forEach(el => {
       el.title = this.t(el.dataset.i18nTitle);
+      el.setAttribute('aria-label', el.title);
     });
   }
 
@@ -134,15 +136,13 @@ class WebAppLauncher {
       reloadBtn.addEventListener('click', () => this.reloadConfigurations());
     }
     if (statusLink) {
-      statusLink.addEventListener('click', (e) => {
-        e.preventDefault();
+      statusLink.addEventListener('click', () => {
         chrome.tabs.create({ url: 'https://status.proton.me/' });
         window.close();
       });
     }
     if (appsLink) {
-      appsLink.addEventListener('click', (e) => {
-        e.preventDefault();
+      appsLink.addEventListener('click', () => {
         chrome.tabs.create({ url: 'https://protonapps.com/' });
         window.close();
       });

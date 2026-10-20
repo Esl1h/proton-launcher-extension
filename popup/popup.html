@@ -18,16 +18,23 @@
       </div>
       
       <div class="status-section">
-        <div class="status-line" id="statusLine1" data-i18n="loadingConfigs"></div>
-        <div class="status-line" id="statusLine2" data-i18n="ready"></div>
-      </div>
-      
-      <div class="status-section">
-        <div class="status-line">
-          <a href="#" id="statusLink" data-i18n="servicesStatus" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;"></a>
+        <div class="status-lines">
+          <div class="status-line" id="statusLine1" data-i18n="loadingConfigs"></div>
+          <div class="status-line" id="statusLine2" data-i18n="ready"></div>
         </div>
-        <div class="status-line">
-          <a href="#" id="appsLink" data-i18n="downloadApps" style="color: rgba(255, 255, 255, 0.9); text-decoration: none;"></a>
+        <div class="footer-actions">
+          <button type="button" class="icon-button" id="statusLink" data-i18n-title="servicesStatus">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </button>
+          <button type="button" class="icon-button" id="appsLink" data-i18n-title="downloadApps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
         </div>
       </div>
       

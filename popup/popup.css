@@ -114,6 +114,10 @@ body {
   border-radius: 8px;
   backdrop-filter: blur(10px);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .status-line {
@@ -144,10 +148,38 @@ body {
   background: #ef4444;
 }
 
-.status-line a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  padding: 2px 4px;
+.status-lines {
+  min-width: 0;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.icon-button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
 }
 
 .settings-button {
