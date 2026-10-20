@@ -102,7 +102,7 @@ class WebAppLauncher {
       item.append(icon, title);
       item.addEventListener('click', (e) => this.openApp(app, e.ctrlKey || e.metaKey));
       item.addEventListener('auxclick', (e) => {
-        if (e.button === 1) this.openApp(app, true);
+        if (e.button === 1) void this.openApp(app, true);
       });
       // Avoid the middle-click autoscroll cursor on platforms that enable it.
       item.addEventListener('mousedown', (e) => {
