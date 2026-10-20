@@ -240,7 +240,9 @@ Contributions are welcome! Feel free to:
 
 == License
 
-This project is open source. See the repository for license details.
+Released under the MIT License. See link:LICENSE[LICENSE].
+
+Proton and the Proton logo are trademarks of Proton AG. This license covers the extension code only.
 
 == Version History
 
