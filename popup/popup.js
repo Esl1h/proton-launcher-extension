@@ -67,10 +67,9 @@ class WebAppLauncher {
     item.className = app ? 'app-item' : 'app-item empty';
     item.dataset.position = position;
 
-    const title = document.createElement('div');
-    title.className = 'app-title';
-
     if (app) {
+      const title = document.createElement('div');
+      title.className = 'app-title';
       const icon = document.createElement('img');
       icon.className = 'app-icon';
       icon.alt = app.title;
@@ -82,10 +81,6 @@ class WebAppLauncher {
       title.textContent = app.title;
       item.append(icon, title);
       item.addEventListener('click', () => this.openApp(app));
-    } else {
-      title.textContent = '+';
-      item.append(title);
-      item.addEventListener('click', () => this.openSettings(position));
     }
 
     return item;
@@ -111,14 +106,10 @@ class WebAppLauncher {
   }
 
   setupEventListeners() {
-    const settingsBtn = document.getElementById('settingsBtn');
     const reloadBtn = document.getElementById('reloadBtn');
     const statusLink = document.getElementById('statusLink');
     const appsLink = document.getElementById('appsLink');
 
-    if (settingsBtn) {
-      settingsBtn.addEventListener('click', () => this.openSettings());
-    }
     if (reloadBtn) {
       reloadBtn.addEventListener('click', () => this.reloadConfigurations());
     }
@@ -186,10 +177,6 @@ class WebAppLauncher {
       indicator.className = `status-indicator ${type}`;
       statusLine.replaceChildren(indicator, text);
     }
-  }
-
-  openSettings() {
-    alert('On development!');
   }
 
   validateUrl(url) {
