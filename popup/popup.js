@@ -14,7 +14,6 @@ class WebAppLauncher {
       await this.loadConfigurations();
       this.renderGrid();
       this.setupEventListeners();
-      this.applyTheme();
       this.updateStatus();
       const loadTime = performance.now() - startTime;
       this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
@@ -173,17 +172,9 @@ class WebAppLauncher {
       this.configCache.clear();
       await this.loadConfigurations();
       this.renderGrid();
-      this.applyTheme();
       this.updateStatusLine(1, this.t('reloaded'), 'success');
     } catch (error) {
       this.updateStatusLine(1, this.t('loadError'), 'error');
-    }
-  }
-
-  applyTheme() {
-    const theme = this.settings.themes?.[this.settings.ui?.theme || 'gradient'];
-    if (theme?.background) {
-      document.body.style.background = theme.background;
     }
   }
 

@@ -9,8 +9,8 @@ body {
   height: 500px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #333;
+  background: var(--background-norm);
+  color: var(--text-norm);
 }
 
 .container {
@@ -61,7 +61,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--background-weak);
+  border: 1px solid var(--border-weak);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -75,12 +76,12 @@ body {
 .app-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 1);
+  background: var(--background-strong);
 }
 
 .app-item.empty {
-  background: rgba(255, 255, 255, 0.3);
-  border: 2px dashed rgba(255, 255, 255, 0.5);
+  background: transparent;
+  border: 2px dashed var(--border-norm);
   cursor: default;
 }
 
@@ -110,9 +111,8 @@ body {
 .status-section {
   margin-top: 12px;
   padding: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--background-weak);
   border-radius: 8px;
-  backdrop-filter: blur(10px);
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@ body {
 
 .status-line {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-weak);
   margin-bottom: 3px;
   display: flex;
   align-items: center;
@@ -137,15 +137,15 @@ body {
   height: 5px;
   border-radius: 50%;
   margin-right: 5px;
-  background: #4ade80;
+  background: var(--signal-success);
 }
 
 .status-indicator.warning {
-  background: #fbbf24;
+  background: var(--signal-warning);
 }
 
 .status-indicator.error {
-  background: #ef4444;
+  background: var(--signal-danger);
 }
 
 .status-lines {
@@ -165,16 +165,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--background-strong);
   border: none;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--text-norm);
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .icon-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--border-norm);
 }
 
 .icon-button svg {
@@ -189,28 +189,28 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--background-weak);
 }
 
 .status-badge.unknown {
-  background: #9ca3af;
+  background: var(--text-hint);
 }
 
 .status-badge.none {
-  background: #4ade80;
+  background: var(--signal-success);
 }
 
 .status-badge.minor {
-  background: #fbbf24;
+  background: var(--signal-warning);
 }
 
 .status-badge.major,
 .status-badge.critical {
-  background: #ef4444;
+  background: var(--signal-danger);
 }
 
 .status-badge.maintenance {
-  background: #60a5fa;
+  background: var(--signal-info);
 }
 
 .settings-button {
@@ -221,16 +221,13 @@ body {
   gap: 4px;
 }
 
-#reloadBtn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
+.settings-button .icon-button {
+  width: 26px;
+  height: 26px;
   border-radius: 6px;
-  padding: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background 0.2s ease;
 }
 
-#reloadBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+.settings-button .icon-button svg {
+  width: 14px;
+  height: 14px;
 }

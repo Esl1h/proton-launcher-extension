@@ -39,7 +39,7 @@ toc::[]
 * *Network Status* - Online/offline indicator for the local connection
 * *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
 * *Keyboard Shortcut* - Open the launcher instantly with `Alt+Shift+L`
-* *Theme Support* - Modern gradient theme with customization options
+* *Light and Dark Themes* - Proton's own Snow and Carbon colors, following the system preference
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
 * *Background Tabs* - `Ctrl`/`Cmd` + click or middle-click opens an app without leaving the current tab
@@ -139,7 +139,6 @@ Edit the files in `config/` to customize apps and preferences.
 ----
 {
   "ui": {
-    "theme": "gradient",
     "grid_columns": 3,
     "grid_rows": 4
   },
@@ -152,10 +151,6 @@ Edit the files in `config/` to customize apps and preferences.
 [cols="1,1,2"]
 |===
 |Option |Default |Description
-
-|`theme`
-|`"gradient"`
-|Active theme name
 
 |`grid_columns`
 |`3`
@@ -187,20 +182,9 @@ Edit `config/apps.json` to add or modify apps:
 
 Icons must be bundled under `assets/apps/`: the Content Security Policy blocks remote images.
 
-=== Creating Custom Themes
+=== Theme Colors
 
-Add new themes in `config/settings.json`:
-
-[source,json]
-----
-{
-  "themes": {
-    "my-theme": {
-      "background": "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
-    }
-  }
-}
-----
+Light and dark colors are CSS variables in `common/theme.css`, copied from Proton's Snow and Carbon themes.
 
 == Security & Permissions
 
@@ -228,6 +212,8 @@ The extension collects no data. App icons are bundled in the package. The only r
 proton-launcher-extension/
 ├── manifest.json            # Extension manifest (Manifest V3)
 ├── _locales/                # UI strings (en, pt_BR)
+├── common/
+│   └── theme.css            # Light and dark theme colors
 ├── config/
 │   ├── apps.json            # Default apps configuration
 │   └── settings.json        # UI and behavior settings

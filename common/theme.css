@@ -1,0 +1,71 @@
+/* Proton "Snow" (light) and "Carbon" (dark) theme colors, as used on account.proton.me. */
+:root {
+  color-scheme: light;
+  --background-norm: #ffffff;
+  --background-weak: #f5f4f2;
+  --background-strong: #e5e4e1;
+  --text-norm: #0c0c14;
+  --text-weak: #5c5958;
+  --text-hint: #8f8d8a;
+  --border-norm: #d1cfcd;
+  --border-weak: #eae7e4;
+  --primary: #6d4aff;
+  --primary-contrast: #ffffff;
+  --signal-success: #1ea885;
+  --signal-warning: #ff9900;
+  --signal-danger: #dc3251;
+  --signal-info: #239ece;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --background-norm: #16141c;
+    --background-weak: #292733;
+    --background-strong: #3f3b4c;
+    --text-norm: #ffffff;
+    --text-weak: #a7a4b5;
+    --text-hint: #6d697d;
+    --border-norm: #4a4658;
+    --border-weak: #343140;
+    --primary: #8a6eff;
+    --signal-danger: #f5385a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background-norm: #16141c;
+  --background-weak: #292733;
+  --background-strong: #3f3b4c;
+  --text-norm: #ffffff;
+  --text-weak: #a7a4b5;
+  --text-hint: #6d697d;
+  --border-norm: #4a4658;
+  --border-weak: #343140;
+  --primary: #8a6eff;
+  --signal-danger: #f5385a;
+}
+
+/* The logo ships in two variants; show the one that matches the background. */
+.logo-on-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-on-light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .logo-on-dark {
+    display: inline;
+  }
+}
+
+:root[data-theme="dark"] .logo-on-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .logo-on-dark {
+  display: inline;
+}
