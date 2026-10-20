@@ -3,7 +3,7 @@
 :toc-title: Table of Contents
 :toclevels: 2
 
-A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with connection status and keyboard shortcuts.
+A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x4 grid, with connection status and keyboard shortcuts.
 
 https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Install from the Chrome Web Store]
 
@@ -35,7 +35,7 @@ toc::[]
 
 == Features
 
-* *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
+* *3x4 Customizable Grid* - Quick access to 12 apps in a clean grid layout
 * *Network Status* - Online/offline indicator for the local connection
 * *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
 * *Keyboard Shortcut* - Open the launcher instantly with `Alt+Shift+L`
@@ -49,7 +49,7 @@ toc::[]
 
 == Pre-configured Apps
 
-The extension comes with 9 pre-configured apps from the Proton ecosystem:
+The extension comes with 12 pre-configured apps from the Proton ecosystem:
 
 [cols="1,2,3"]
 |===
@@ -90,6 +90,18 @@ The extension comes with 9 pre-configured apps from the Proton ecosystem:
 |Lumo AI
 |https://lumo.proton.me
 |Proton AI assistant
+
+|Docs
+|https://docs.proton.me
+|Encrypted collaborative documents
+
+|Sheets
+|https://sheets.proton.me
+|Encrypted spreadsheets
+
+|Meet
+|https://meet.proton.me
+|Encrypted video calls
 |===
 
 == Installation
@@ -128,7 +140,8 @@ Edit the files in `config/` to customize apps and preferences.
 {
   "ui": {
     "theme": "gradient",
-    "grid_size": 3
+    "grid_columns": 3,
+    "grid_rows": 4
   },
   "behavior": {
     "close_popup_on_launch": true
@@ -144,9 +157,13 @@ Edit the files in `config/` to customize apps and preferences.
 |`"gradient"`
 |Active theme name
 
-|`grid_size`
+|`grid_columns`
 |`3`
-|Grid dimensions (3 = 3x3 grid)
+|Number of grid columns
+
+|`grid_rows`
+|`4`
+|Number of grid rows
 
 |`close_popup_on_launch`
 |`true`

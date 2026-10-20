@@ -71,9 +71,10 @@ class WebAppLauncher {
     if (!grid) return;
 
     grid.replaceChildren();
-    const gridSize = this.getGridSize();
-    const totalSlots = gridSize * gridSize;
-    grid.style.setProperty('--grid-size', gridSize);
+    const { columns, rows } = this.getGridSize();
+    const totalSlots = columns * rows;
+    grid.style.setProperty('--grid-columns', columns);
+    grid.style.setProperty('--grid-rows', rows);
 
     for (let i = 0; i < totalSlots; i++) {
       const app = this.apps.find(app => app.position === i);
@@ -114,7 +115,10 @@ class WebAppLauncher {
   }
 
   getGridSize() {
-    return this.settings.ui?.grid_size || 3;
+    return {
+      columns: this.settings.ui?.grid_columns || 3,
+      rows: this.settings.ui?.grid_rows || 4
+    };
   }
 
   async openApp(app, background = false) {
@@ -193,7 +197,8 @@ class WebAppLauncher {
     const statusText = this.t(online ? 'online' : 'offline');
     const statusType = online ? 'success' : 'warning';
     const configuredApps = this.apps.length;
-    const totalSlots = this.getGridSize() ** 2;
+    const { columns, rows } = this.getGridSize();
+    const totalSlots = columns * rows;
     this.updateStatusLine(2, this.t('appsStatus', statusText, configuredApps, totalSlots), statusType);
   }
 

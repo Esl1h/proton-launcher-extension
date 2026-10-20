@@ -63,6 +63,27 @@
       "icon": "/assets/apps/ai.png",
       "position": 8,
       "description": "Private AI assistant"
+    },
+    {
+      "title": "Docs",
+      "url": "https://docs.proton.me",
+      "icon": "/assets/apps/docs.png",
+      "position": 9,
+      "description": "Encrypted collaborative documents"
+    },
+    {
+      "title": "Sheets",
+      "url": "https://sheets.proton.me",
+      "icon": "/assets/apps/sheets.png",
+      "position": 10,
+      "description": "Encrypted spreadsheets"
+    },
+    {
+      "title": "Meet",
+      "url": "https://meet.proton.me",
+      "icon": "/assets/apps/meet.png",
+      "position": 11,
+      "description": "Encrypted video calls"
     }
   ]
 }
