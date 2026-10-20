@@ -29,5 +29,6 @@
   "reloaded": { "message": "Settings reloaded" },
   "reloadTitle": { "message": "Reload settings" },
   "servicesStatus": { "message": "Services status" },
+  "statusUnavailable": { "message": "unavailable" },
   "downloadApps": { "message": "Download official apps and extensions" }
 }

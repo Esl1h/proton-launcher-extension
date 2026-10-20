@@ -37,6 +37,7 @@ toc::[]
 
 * *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
 * *Network Status* - Online/offline indicator for the local connection
+* *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
 * *Keyboard Shortcut* - Open the launcher instantly with `Ctrl+Shift+L`
 * *Theme Support* - Modern gradient theme with customization options
 * *Performance Metrics* - Displays load time in milliseconds
@@ -192,11 +193,11 @@ This extension operates with *zero explicit permissions*. It only uses:
 * *URL Whitelist* - Only allows URLs from approved domains (Proton, SimpleLogin, StandardNotes)
 * *HTTPS Only* - All URLs must use HTTPS protocol
 * *XSS Protection* - UI is built with DOM APIs and `textContent`, never `innerHTML`
-* *Content Security Policy* - Strict CSP preventing inline scripts and remote images or requests
+* *Content Security Policy* - Strict CSP preventing inline scripts and remote images; network requests are limited to `status.proton.me`
 
 === Privacy
 
-The extension collects no data and makes no network requests on its own. App icons are bundled in the package, so opening the popup does not contact any server. Network traffic only happens when you click an app or link, which opens that site in a new tab.
+The extension collects no data. App icons are bundled in the package. The only request it makes on its own is one anonymous call to the public `https://status.proton.me/api/v2/status.json` endpoint each time the popup opens, without cookies, to color the service status badge. Any other traffic only happens when you click an app or link, which opens that site in a new tab.
 
 == Project Structure
 
@@ -252,6 +253,6 @@ Proton and the Proton logo are trademarks of Proton AG. This license covers the 
 
 == Version History
 
-* *1.5.0* - Bundled app icons (no network requests when opening the popup), stricter CSP, English and Brazilian Portuguese UI, proper extension icons, safer DOM rendering and URL checks, configurable grid size, native shortcut handling
+* *1.5.0* - Service status badge from status.proton.me, bundled app icons, stricter CSP, English and Brazilian Portuguese UI, proper extension icons, safer DOM rendering and URL checks, configurable grid size, native shortcut handling
 * *1.4.1* - URL fixes
 * *1.4.0* - Initial public release

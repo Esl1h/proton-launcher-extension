@@ -29,5 +29,6 @@
   "reloaded": { "message": "Configurações recarregadas" },
   "reloadTitle": { "message": "Recarregar configurações" },
   "servicesStatus": { "message": "Status dos serviços" },
+  "statusUnavailable": { "message": "indisponível" },
   "downloadApps": { "message": "Baixar apps e extensões oficiais" }
 }

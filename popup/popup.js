@@ -20,6 +20,7 @@ class WebAppLauncher {
       this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
       window.addEventListener('online', () => this.updateStatus());
       window.addEventListener('offline', () => this.updateStatus());
+      this.checkServiceStatus();
     } catch (error) {
       this.updateStatusLine(1, this.t('loadError'), 'error');
       this.updateStatusLine(2, '', 'error');
@@ -181,6 +182,29 @@ class WebAppLauncher {
     const configuredApps = this.apps.length;
     const totalSlots = this.getGridSize() ** 2;
     this.updateStatusLine(2, this.t('appsStatus', statusText, configuredApps, totalSlots), statusType);
+  }
+
+  async checkServiceStatus() {
+    const badge = document.getElementById('serviceBadge');
+    const button = document.getElementById('statusLink');
+    if (!badge || !button) return;
+
+    let indicator = 'unknown';
+    let description = this.t('statusUnavailable');
+    try {
+      // Public Atlassian Statuspage API behind status.proton.me.
+      const response = await fetch('https://status.proton.me/api/v2/status.json');
+      const { status } = await response.json();
+      if (['none', 'minor', 'major', 'critical', 'maintenance'].includes(status.indicator)) {
+        indicator = status.indicator;
+        description = status.description;
+      }
+    } catch {
+      // Keep the neutral badge when offline or the API is unreachable.
+    }
+    badge.className = `status-badge ${indicator}`;
+    button.title = `${this.t('servicesStatus')}: ${description}`;
+    button.setAttribute('aria-label', button.title);
   }
 
   updateStatusLine(lineNumber, text, type = 'success') {

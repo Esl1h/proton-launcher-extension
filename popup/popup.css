@@ -182,6 +182,37 @@ body {
   height: 18px;
 }
 
+.status-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.status-badge.unknown {
+  background: #9ca3af;
+}
+
+.status-badge.none {
+  background: #4ade80;
+}
+
+.status-badge.minor {
+  background: #fbbf24;
+}
+
+.status-badge.major,
+.status-badge.critical {
+  background: #ef4444;
+}
+
+.status-badge.maintenance {
+  background: #60a5fa;
+}
+
 .settings-button {
   position: absolute;
   top: 6px;
