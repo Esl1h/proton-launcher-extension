@@ -3,7 +3,9 @@
 :toc-title: Table of Contents
 :toclevels: 2
 
-A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with real-time connection status and keyboard shortcuts.
+A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x3 grid, with connection status and keyboard shortcuts.
+
+https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Install from the Chrome Web Store]
 
 ++++
 <div align="center">
@@ -89,6 +91,10 @@ The extension comes with 9 pre-configured apps from the Proton ecosystem:
 |===
 
 == Installation
+
+Install it from the https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Chrome Web Store] (works in Chrome, Brave, Edge and other Chromium browsers).
+
+=== From source
 
 . Download or clone this repository
 . In Chrome/Brave, go to `chrome://extensions/` and enable *Developer mode*
