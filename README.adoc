@@ -3,7 +3,7 @@
 :toc-title: Table of Contents
 :toclevels: 2
 
-A Chrome/Brave/Chromium extension that allows you to quickly launch Proton WebApps from a customizable 3x4 grid, with connection status and keyboard shortcuts.
+A Chrome/Brave/Chromium and Firefox extension that allows you to quickly launch Proton WebApps from a customizable 3x4 grid, with connection status and keyboard shortcuts.
 
 https://chromewebstore.google.com/detail/proton-launcher-unofficia/ajniphjinhppblnkeolojgopecjlnecn[Install from the Chrome Web Store]
 
@@ -114,6 +114,17 @@ Install it from the https://chromewebstore.google.com/detail/proton-launcher-uno
 . Download or clone this repository
 . In Chrome/Brave, go to `chrome://extensions/` and enable *Developer mode*
 . Click "*Load unpacked*" and select the project folder
+
+=== Firefox
+
+Firefox 140 or later is supported, including forks such as Mullvad Browser. To try it from source:
+
+. Go to `about:debugging#/runtime/this-firefox`
+. Click "*Load Temporary Add-on*" and select the `manifest.json` file
+
+A temporary add-on is removed when Firefox restarts.
+
+In browsers that always use private browsing, such as Mullvad Browser, the extension only runs after enabling *Run in Private Windows* in `about:addons` → Proton Launcher.
 
 == Shortcuts
 
@@ -238,7 +249,7 @@ proton-launcher-extension/
 == Technology Stack
 
 * *JavaScript* - Pure vanilla JS (ES6+)
-* *Chrome Extensions* - Manifest V3
+* *WebExtensions* - Manifest V3, one manifest for Chromium and Firefox
 * *CSS3* - Modern styling with CSS custom properties
 
 == Links
