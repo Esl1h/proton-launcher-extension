@@ -38,7 +38,7 @@ toc::[]
 * *3x3 Customizable Grid* - Quick access to 9 apps in a clean grid layout
 * *Network Status* - Online/offline indicator for the local connection
 * *Service Status* - Colored badge on the status button showing the current state reported by https://status.proton.me[status.proton.me]
-* *Keyboard Shortcut* - Open the launcher instantly with `Alt+Shift+P`
+* *Keyboard Shortcut* - Open the launcher instantly with `Alt+Shift+L`
 * *Theme Support* - Modern gradient theme with customization options
 * *Performance Metrics* - Displays load time in milliseconds
 * *Auto-close* - Optionally closes popup after launching an app
@@ -108,14 +108,14 @@ Install it from the https://chromewebstore.google.com/detail/proton-launcher-uno
 |===
 |Shortcut |Action
 
-|`Alt+Shift+P`
+|`Alt+Shift+L`
 |Open the launcher popup
 
 |`Ctrl`/`Cmd` + click, or middle-click
 |Open the app in a background tab and keep the popup open
 |===
 
-If `Alt+Shift+P` does not open the popup, another extension already uses it (browsers skip a suggested shortcut that conflicts). Set a different one in `chrome://extensions/shortcuts`. Installs from earlier versions, which suggested `Ctrl+Shift+L`, may keep their previous shortcut.
+If `Alt+Shift+L` does not open the popup, the browser or another extension already uses it (a suggested shortcut that conflicts is skipped). Set a different one in `chrome://extensions/shortcuts`. Installs from earlier versions, which suggested `Ctrl+Shift+L`, may keep their previous shortcut.
 
 == Configuration
 
