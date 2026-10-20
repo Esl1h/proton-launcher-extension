@@ -3,7 +3,7 @@ class WebAppLauncher {
     this.apps = [];
     this.settings = {};
     this.configCache = new Map();
-    this.init();
+    void this.init();
   }
 
   async init() {
@@ -20,7 +20,8 @@ class WebAppLauncher {
       this.updateStatusLine(1, this.t('loadedIn', loadTime.toFixed(1)), 'success');
       window.addEventListener('online', () => this.updateStatus());
       window.addEventListener('offline', () => this.updateStatus());
-      this.checkServiceStatus();
+      // Not awaited: the badge fills in later and failures are handled inside.
+      void this.checkServiceStatus();
     } catch (error) {
       this.updateStatusLine(1, this.t('loadError'), 'error');
       this.updateStatusLine(2, '', 'error');
